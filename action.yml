@@ -2,10 +2,19 @@ name: 'Your name here'
 description: 'Provide a description here'
 author: 'Your name or organization here'
 inputs:
-  milliseconds: # change this
+  provider:
+    description: 'The upload provider to use'
     required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+    default: 'Memory'
+  provider_options:
+    description: 'Options for the upload provider, formatted as Key=Values per line'
+    required: false
+    default: ''
+  include:
+    description: 'The files to include in the upload'
+    required: true
+    default: '**/*'
+
 runs:
   using: 'node16'
   main: 'dist/index.js'
