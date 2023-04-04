@@ -21,4 +21,4 @@ jobs:
             endpoint=https://dav.jianguoyun.com/dav/openDAL
             username=${{secrets.webdav_username}}
             password=${{secrets.webdav_password}}
-          include: '/__tests__/fixtures/temp'
+          include: '__tests__/**'
