@@ -7,11 +7,13 @@ import {includeFiles} from './glob-helper'
 async function run(): Promise<void> {
   try {
     const config = new ConfigHelper()
+    const pathSpec = await includeFiles(config.patterns)
     core.debug(`provider options: ${JSON.stringify(config.options)}`)
     core.debug(`include patterns: ${JSON.stringify(config.patterns)}`)
-    const op = new Operator(config.provider, config.options)
+    core.debug(`path spec: ${JSON.stringify(pathSpec)}`)
+
     core.startGroup(`Upload files to ${config.provider} start`)
-    const pathSpec = await includeFiles(config.patterns)
+    const op = new Operator(config.provider, config.options)
     for (const spec of pathSpec) {
       core.debug(`upload file: ${spec.fsPath}`)
       core.info(`upload file: ${spec.path} tp ${spec.dir}`)

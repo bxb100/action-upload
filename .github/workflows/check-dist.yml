@@ -29,12 +29,12 @@ jobs:
           node-version: 16
 
       - name: Install dependencies
-        run: yarn install
+        run: pnpm install
 
       - name: Rebuild the dist/ directory
         run: |
-          yarn run build
-          yarn run package
+          pnpm run build
+          pnpm run package
 
       - name: Compare the expected and actual dist/ directories
         run: |
