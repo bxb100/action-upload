@@ -25,5 +25,4 @@ jobs:
       - uses: ./
         with:
           provider: memory
-          include:
-            - '__tests__/fixtures/temp'
+          include: '__tests__/fixtures/temp'
