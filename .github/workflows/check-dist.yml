@@ -22,7 +22,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
+      - uses: pnpm/action-setup@v2
+        with:
+        version: 6.32.9
       - name: Set Node.js 16
         uses: actions/setup-node@v3
         with:
