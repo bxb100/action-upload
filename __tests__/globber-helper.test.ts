@@ -8,6 +8,7 @@ test('test glob', async () => {
   const file = await includeFiles(patterns)
   assert(file.length > 0)
   for (let pathSpec of file) {
+    console.log(pathSpec)
     assert.equal(path.join(__dirname, pathSpec.path), pathSpec.fsPath)
   }
 })
