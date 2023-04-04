@@ -1,6 +1,6 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'Upload Action'
+description: 'upload file to S3/WebDAV/Hdfs/Ipfs/AliYun OSS/Azure Storage and more'
+author: 'Lemon'
 inputs:
   provider:
     description: 'The upload provider to use'
