@@ -5,6 +5,8 @@ on: # rebuild any PRs and main branch changes
     branches:
       - main
       - 'releases/*'
+    paths-ignore:
+      - '**.md'
 
 jobs:
   test: # make sure the action works on a clean machine without building
@@ -19,4 +21,4 @@ jobs:
             endpoint=https://dav.jianguoyun.com/dav/openDAL
             username=${{secrets.webdav_username}}
             password=${{secrets.webdav_password}}
-          include: '__tests__/fixtures/temp'
+          include: '/__tests__/fixtures/temp'

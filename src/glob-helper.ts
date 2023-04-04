@@ -1,3 +1,4 @@
+import * as core from '@actions/core'
 import * as glob from '@actions/glob'
 
 const patterSplit = (
@@ -27,6 +28,7 @@ export const includeFiles = async (patterns: string[]): Promise<PathSpec[]> => {
     omitBrokenSymbolicLinks: true
   })
   const searchPaths = globber.getSearchPaths()
+  core.debug(`search paths: ${searchPaths}`)
   const paths: PathSpec[] = []
   for await (const file of globber.globGenerator()) {
     for (const base of searchPaths) {

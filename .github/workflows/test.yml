@@ -5,6 +5,8 @@ on: # rebuild any PRs and main branch changes
     branches:
       - main
       - 'releases/*'
+    paths-ignore:
+      - '**.md'
 
 jobs:
   build: # make sure build/ci work properly
