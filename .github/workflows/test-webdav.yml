@@ -1,0 +1,21 @@
+name: 'test-webdav'
+on: # rebuild any PRs and main branch changes
+  pull_request:
+  push:
+    branches:
+      - main
+      - 'releases/*'
+
+jobs:
+  test: # make sure the action works on a clean machine without building
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./
+        with:
+          provider: webdav
+          provider_options: |
+            endpoint=https://dav.jianguoyun.com/dav/
+            username=${{secrets.webdav_username}}
+            password=${{secrets.webdav_password}}
+          include: '__tests__/fixtures/temp'
