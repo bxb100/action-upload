@@ -2,7 +2,7 @@
   :outbox_tray: :octocat:
 </div>
 <h1 align="center">
-  Uniform Uploader Action
+  Uniform Uploader
 </h1>
 <p align="center">
 A GitHub Action for uploading files to S3/FTP/WebDAV and <a href="https://docs.rs/opendal/latest/opendal/services/index.html">more</a>, powered by <a href="https://github.com/apache/incubator-opendal">Apache OpenDAL</a>
@@ -16,7 +16,9 @@ A GitHub Action for uploading files to S3/FTP/WebDAV and <a href="https://docs.r
 
 ## Providers
 
-### Memory  [![build-test](https://github.com/bxb100/action-upload/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/bxb100/action-upload/actions/workflows/test.yml)
+### Memory
+
+[![build-test](https://github.com/bxb100/action-upload/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/bxb100/action-upload/actions/workflows/test.yml)
 
 ```yaml
 - name: Upload to memory
@@ -26,8 +28,9 @@ A GitHub Action for uploading files to S3/FTP/WebDAV and <a href="https://docs.r
     include: '__tests__/**'
 ```
 
-### WebDAV [![test-webdav](https://github.com/bxb100/action-upload/actions/workflows/test-webdav.yml/badge.svg?branch=main)](https://github.com/bxb100/action-upload/actions/workflows/test-webdav.yml)
+### WebDAV
 
+[![test-webdav](https://github.com/bxb100/action-upload/actions/workflows/test-webdav.yml/badge.svg?branch=main)](https://github.com/bxb100/action-upload/actions/workflows/test-webdav.yml)
 <details>
 <summary>Options</summary>
 
