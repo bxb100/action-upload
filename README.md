@@ -12,8 +12,23 @@ A GitHub Action for uploading files to S3/FTP/WebDAV and <a href="https://docs.r
 powered by <a href="https://github.com/apache/incubator-opendal">Apache OpenDAL</a>
 </p>
 
-## Defect
+> currently, the action only supports **Linux-x64** platform
 
-* currently, the action only supports **Linux-x64** platform
-* just implements the `Write` and `CreateDir` methods
-* the action may contain bunch bugs
+## Memory  [![build-test](https://github.com/bxb100/action-upload/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/bxb100/action-upload/actions/workflows/test.yml)
+
+## WebDAV [![test-webdav](https://github.com/bxb100/action-upload/actions/workflows/test-webdav.yml/badge.svg?branch=main)](https://github.com/bxb100/action-upload/actions/workflows/test-webdav.yml)
+
+<details>
+<summary>Options</summary>
+
+[OpenDAL WebDAV](https://docs.rs/opendal/latest/opendal/services/struct.Webdav.html)
+
+| Name     | Description         | Default | Other                                          |
+|----------|---------------------|---------|------------------------------------------------|
+| endpoint | WebDAV endpoint     | -       | -                                              |
+| username | WebDAV username     | -       | -                                              |
+| password | WebDAV password     | -       | -                                              |
+| token    | WebDAV bearer token | -       | -                                              |
+| root     | WebDAV root path    | -       | Input root MUST be the format like `/abc/def/` |
+
+</details>

@@ -3,8 +3,6 @@ import * as cp from 'child_process'
 import * as path from 'path'
 import {expect, test} from '@jest/globals'
 import {Operator} from 'opendal'
-import {run} from '../src/main'
-import * as core from '@actions/core'
 
 // shows how the runner will run a javascript action with env / stdout protocol
 test('test runs', () => {

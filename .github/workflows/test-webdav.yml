@@ -18,7 +18,8 @@ jobs:
           provider: webdav
           # bug 1: not support create dir in the root webdav path, not sure is that only occurs in jianguoyun
           provider_options: |
-            endpoint=https://dav.jianguoyun.com/dav/openDAL
+            endpoint=https://dav.jianguoyun.com/dav
             username=${{secrets.webdav_username}}
             password=${{secrets.webdav_password}}
+            root=/openDAL/
           include: '__tests__/**'

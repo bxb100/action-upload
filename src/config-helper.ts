@@ -7,10 +7,13 @@ export class ConfigHelper {
 
   constructor() {
     // provider
-    this._provider = core.getInput('provider', {
-      required: true,
-      trimWhitespace: true
-    })
+    this._provider = core
+      .getInput('provider', {
+        required: true,
+        trimWhitespace: true
+      })
+      // openDAL from_str support lower case provider name
+      .toLowerCase()
     // provider options
     this._options = {}
     const provider_options = core
@@ -20,7 +23,7 @@ export class ConfigHelper {
       .filter((option: string) => option !== '')
     for (const option of provider_options) {
       const [key, value] = option.split('=')
-      this._options[key] = value
+      this._options[key.trim()] = value.trim()
     }
     // include file patterns
     this._patterns = core.getMultilineInput('include', {
