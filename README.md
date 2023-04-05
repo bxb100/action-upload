@@ -26,7 +26,7 @@ A GitHub Action for uploading files to S3/FTP/WebDAV and <a href="https://docs.r
     include: '__tests__/**'
 ```
 
-## WebDAV [![test-webdav](https://github.com/bxb100/action-upload/actions/workflows/test-webdav.yml/badge.svg?branch=main)](https://github.com/bxb100/action-upload/actions/workflows/test-webdav.yml)
+### WebDAV [![test-webdav](https://github.com/bxb100/action-upload/actions/workflows/test-webdav.yml/badge.svg?branch=main)](https://github.com/bxb100/action-upload/actions/workflows/test-webdav.yml)
 
 <details>
 <summary>Options</summary>
