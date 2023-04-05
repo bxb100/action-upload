@@ -22,21 +22,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 6.32.9
       - name: Set Node.js 16
         uses: actions/setup-node@v3
         with:
           node-version: 16
 
       - name: Install dependencies
-        run: pnpm install
+        run: npm install
 
       - name: Rebuild the dist/ directory
         run: |
-          pnpm run build
-          pnpm run package
+          npm run build
+          npm run package
 
       - name: Compare the expected and actual dist/ directories
         run: |

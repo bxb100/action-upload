@@ -25,4 +25,4 @@ test('test double asterisk', async () => {
   for (let pathSpec of file) {
     assert(pathSpec.dir)
   }
-})
+}, 100000)

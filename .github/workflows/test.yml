@@ -13,13 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 6.32.9
       - run: |
-          pnpm install
+          npm install
       - run: |
-          pnpm run all
+          npm run all
   test: # make sure the action works on a clean machine without building
     runs-on: ubuntu-latest
     steps:

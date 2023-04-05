@@ -13,6 +13,7 @@ powered by <a href="https://github.com/apache/incubator-opendal">Apache OpenDAL<
 </p>
 
 > currently, the action only supports **Linux-x64** platform
+>
 
 ## Memory  [![build-test](https://github.com/bxb100/action-upload/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/bxb100/action-upload/actions/workflows/test.yml)
 
@@ -52,4 +53,12 @@ powered by <a href="https://github.com/apache/incubator-opendal">Apache OpenDAL<
       password: ${{ secrets.WEBDAV_PASSWORD }}
       root: /test/
     include: '__tests__/**'
+```
+
+## Dev
+
+Using `sitespeedio/node:ubuntu-22.04-nodejs-18.14.2` as node interpreter
+
+```bash
+docker pull sitespeedio/node:ubuntu-22.04-nodejs-18.14.2 --platform "linux/amd64"
 ```
