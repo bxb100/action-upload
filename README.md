@@ -14,7 +14,9 @@ A GitHub Action for uploading files to S3/FTP/WebDAV and <a href="https://docs.r
 > currently, the action only supports **Linux-x64** platform
 >
 
-## Memory  [![build-test](https://github.com/bxb100/action-upload/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/bxb100/action-upload/actions/workflows/test.yml)
+## Providers
+
+### Memory  [![build-test](https://github.com/bxb100/action-upload/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/bxb100/action-upload/actions/workflows/test.yml)
 
 ```yaml
 - name: Upload to memory
@@ -54,7 +56,7 @@ A GitHub Action for uploading files to S3/FTP/WebDAV and <a href="https://docs.r
     include: '__tests__/**'
 ```
 
-## Azblob
+### Azblob
 
 Azure Storage Blob services support.
 <details>
@@ -70,7 +72,7 @@ Azure Storage Blob services support.
 
 </details>
 
-## S3
+### S3
 
 Aws S3 and compatible services (including minio, digitalocean space and so on) support.
 
