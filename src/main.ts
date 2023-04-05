@@ -16,7 +16,7 @@ export async function run(): Promise<void> {
     core.debug(`path spec: ${JSON.stringify(pathSpec)}`)
     for (const spec of pathSpec) {
       core.debug(`upload file: ${spec.fsPath}`)
-      core.info(`upload file: ${spec.path} tp ${spec.dir}`)
+      core.info(`upload file: ${spec.path} to ${spec.dir}`)
       // ensure the upload directory exists, relative path from search path
       if (spec.dir) {
         core.debug(`ensure the upload directory exists: ${spec.dir}`)

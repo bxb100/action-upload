@@ -16,6 +16,14 @@ powered by <a href="https://github.com/apache/incubator-opendal">Apache OpenDAL<
 
 ## Memory  [![build-test](https://github.com/bxb100/action-upload/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/bxb100/action-upload/actions/workflows/test.yml)
 
+```yaml
+- name: Upload to memory
+  uses: bxb100/action-upload@main
+  with:
+    provider: memory
+    include: '__tests__/**'
+```
+
 ## WebDAV [![test-webdav](https://github.com/bxb100/action-upload/actions/workflows/test-webdav.yml/badge.svg?branch=main)](https://github.com/bxb100/action-upload/actions/workflows/test-webdav.yml)
 
 <details>
@@ -32,3 +40,16 @@ powered by <a href="https://github.com/apache/incubator-opendal">Apache OpenDAL<
 | root     | WebDAV root path    | -       | Input root MUST be the format like `/abc/def/` |
 
 </details>
+
+```yaml
+- name: Upload to WebDAV
+  uses: bxb100/action-upload@main
+  with:
+    provider: webdav
+    provider_options: |
+      endpoint: ${{ secrets.WEBDAV_ENDPOINT }}
+      username: ${{ secrets.WEBDAV_USERNAME }}
+      password: ${{ secrets.WEBDAV_PASSWORD }}
+      root: /test/
+    include: '__tests__/**'
+```

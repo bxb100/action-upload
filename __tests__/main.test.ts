@@ -17,7 +17,7 @@ test('test runs', () => {
   console.log(cp.execFileSync(np, [ip], options).toString())
 })
 
-test('test openDAL', async () => {
+test('test openDAL memory', async () => {
   const op = new Operator('memory', {})
   await op.write('temp', 'Hello World')
   const content = await op.read('temp')
