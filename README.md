@@ -101,10 +101,12 @@ Aws S3 and compatible services (including minio, digitalocean space and so on) s
 
 </details>
 
-## Dev
+## Dev (Apple silicon)
 
 Using `sitespeedio/node:ubuntu-22.04-nodejs-18.14.2` as node interpreter
 
 ```bash
 docker pull sitespeedio/node:ubuntu-22.04-nodejs-18.14.2 --platform "linux/amd64"
 ```
+
+Jetbrains IDE setting: https://www.jetbrains.com/help/idea/node-js-interpreters.html#ws_node_interpreters_dialog_open
