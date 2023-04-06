@@ -1,4 +1,4 @@
-name: 'test-webdav'
+name: 'test-s3'
 on:
   pull_request:
   push:

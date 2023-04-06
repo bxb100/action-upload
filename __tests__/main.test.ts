@@ -21,6 +21,7 @@ describe('test basic function', () => {
     process.env['INPUT_PROVIDER'] = 'memory'
     process.env['INPUT_PROVIDER_OPTIONS'] = ''
     process.env['INPUT_INCLUDE'] = '__tests__/**/temp'
+    process.env['INPUT_FLATTEN'] = 'true'
     const np = process.execPath
     const ip = path.join(__dirname, '..', 'lib', 'main.js')
     const options: cp.ExecFileSyncOptions = {
