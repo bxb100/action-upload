@@ -2,7 +2,7 @@
   :outbox_tray: :octocat:
 </div>
 <h1 align="center">
-  Uniform Uploader
+  Uniform Uploader 
 </h1>
 <p align="center">
 A GitHub Action for uploading files to S3/FTP/WebDAV and <a href="https://docs.rs/opendal/latest/opendal/services/index.html">more</a>, powered by <a href="https://github.com/apache/incubator-opendal">Apache OpenDAL</a>
@@ -16,7 +16,7 @@ A GitHub Action for uploading files to S3/FTP/WebDAV and <a href="https://docs.r
 
 ## Providers
 
-### Memory
+### Memory (for test)
 
 [![build-test](https://github.com/bxb100/action-upload/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/bxb100/action-upload/actions/workflows/test.yml)
 
@@ -59,23 +59,9 @@ A GitHub Action for uploading files to S3/FTP/WebDAV and <a href="https://docs.r
     include: '__tests__/**'
 ```
 
-### Azblob
-
-Azure Storage Blob services support.
-<details>
-<summary>Options</summary>
-
-[OpenDAL Azblob](https://docs.rs/opendal/latest/opendal/services/struct.Azblob.html)
-
-- `root`: Set the work dir for backend.
-- `container`: Set the container name for backend.
-- `endpoint`: Set the endpoint for backend.
-- `account_name`: Set the account_name for backend.
-- `account_key`: Set the account_key for backend.
-
-</details>
-
 ### S3
+
+[![test-s3](https://github.com/bxb100/action-upload/actions/workflows/test-s3.yml/badge.svg?branch=main)](https://github.com/bxb100/action-upload/actions/workflows/test-s3.yml)
 
 Aws S3 and compatible services (including minio, digitalocean space and so on) support.
 
@@ -114,6 +100,22 @@ Aws S3 and compatible services (including minio, digitalocean space and so on) s
       secret_access_key=${{secrets.CLOUDFLARE_R2_SECRET}}
     include: '__tests__/**'
 ```
+
+### Azblob
+
+Azure Storage Blob services support.
+<details>
+<summary>Options</summary>
+
+[OpenDAL Azblob](https://docs.rs/opendal/latest/opendal/services/struct.Azblob.html)
+
+- `root`: Set the work dir for backend.
+- `container`: Set the container name for backend.
+- `endpoint`: Set the endpoint for backend.
+- `account_name`: Set the account_name for backend.
+- `account_key`: Set the account_key for backend.
+
+</details>
 
 ## Dev (Apple silicon)
 
