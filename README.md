@@ -101,6 +101,20 @@ Aws S3 and compatible services (including minio, digitalocean space and so on) s
 
 </details>
 
+```yaml
+- name: Upload to S3
+  uses: bxb100/action-upload@main
+  with:
+    provider: s3
+    provider_options: |
+      root=/cs
+      bucket=action-upload-test
+      endpoint=https://${{secrets.CLOUDFLARE_R2_ACCOUNTID}}.r2.cloudflarestorage.com
+      access_key_id=${{secrets.CLOUDFLARE_R2_KEY}}
+      secret_access_key=${{secrets.CLOUDFLARE_R2_SECRET}}
+    include: '__tests__/**'
+```
+
 ## Dev (Apple silicon)
 
 ### JetBrains IDE

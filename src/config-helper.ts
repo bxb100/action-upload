@@ -4,6 +4,7 @@ export class ConfigHelper {
   private readonly _provider: string
   private readonly _options: Record<string, string>
   private readonly _patterns: string[]
+  private readonly _flatten: boolean
 
   constructor() {
     // provider
@@ -30,6 +31,10 @@ export class ConfigHelper {
       required: true,
       trimWhitespace: true
     })
+
+    this._flatten = core.getBooleanInput('flatten', {
+      required: false
+    })
   }
 
   get provider(): string {
@@ -42,5 +47,9 @@ export class ConfigHelper {
 
   get patterns(): string[] {
     return this._patterns
+  }
+
+  get flatten(): boolean {
+    return this._flatten
   }
 }

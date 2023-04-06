@@ -15,6 +15,7 @@ const patterSplit = (
 export declare interface PathSpec {
   dir: string
   path: string
+  basename: string
   fsPath: string
 }
 
@@ -31,12 +32,17 @@ export const includeFiles = async (patterns: string[]): Promise<PathSpec[]> => {
   core.debug(`search paths: ${searchPaths}`)
   const paths: PathSpec[] = []
   for await (const file of globber.globGenerator()) {
-    // according to the action/glob rule, the getSearchPaths may return multiple
+    // according to the `@action/glob` rule, the getSearchPaths may return multiple
     for (const base of searchPaths) {
       if (file.startsWith(base)) {
-        const dir = file.substring(base.length, file.lastIndexOf('/'))
+        let dir = file.substring(base.length, file.lastIndexOf('/'))
+        if (dir) {
+          // openDAL need the directory path end with '/'
+          dir = `${dir}/`
+        }
+        const basename = file.substring(file.lastIndexOf('/') + 1)
         const path = file.substring(base.length + 1)
-        paths.push({dir, path, fsPath: file})
+        paths.push({dir, path, basename, fsPath: file})
       }
     }
   }

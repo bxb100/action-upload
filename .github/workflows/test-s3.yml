@@ -1,0 +1,25 @@
+name: 'test-webdav'
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - 'releases/*'
+    paths-ignore:
+      - '**.md'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./
+        with:
+          provider: s3
+          provider_options: |
+            root=/cs
+            bucket=action-upload-test
+            endpoint=https://${{secrets.CLOUDFLARE_R2_ACCOUNTID}}.r2.cloudflarestorage.com
+            access_key_id=${{secrets.CLOUDFLARE_R2_KEY}}
+            secret_access_key=${{secrets.CLOUDFLARE_R2_SECRET}}
+          include: '__tests__/**'
