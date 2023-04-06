@@ -65,6 +65,9 @@ class ConfigHelper {
             required: true,
             trimWhitespace: true
         });
+        this._flatten = core.getBooleanInput('flatten', {
+            required: false
+        });
     }
     get provider() {
         return this._provider;
@@ -74,6 +77,9 @@ class ConfigHelper {
     }
     get patterns() {
         return this._patterns;
+    }
+    get flatten() {
+        return this._flatten;
     }
 }
 exports.ConfigHelper = ConfigHelper;
@@ -156,12 +162,21 @@ const includeFiles = (patterns) => __awaiter(void 0, void 0, void 0, function* (
             _d = false;
             try {
                 const file = _c;
-                // according to the action/glob rule, the getSearchPaths may return multiple
+                // exclude .DS_Store
+                if (file.endsWith('.DS_Store')) {
+                    continue;
+                }
+                // according to the `@action/glob` rule, the getSearchPaths may return multiple
                 for (const base of searchPaths) {
                     if (file.startsWith(base)) {
-                        const dir = file.substring(base.length, file.lastIndexOf('/'));
+                        let dir = file.substring(base.length, file.lastIndexOf('/'));
+                        if (dir) {
+                            // openDAL need the directory path end with '/'
+                            dir = `${dir}/`;
+                        }
+                        const basename = file.substring(file.lastIndexOf('/') + 1);
                         const path = file.substring(base.length + 1);
-                        paths.push({ dir, path, fsPath: file });
+                        paths.push({ dir, path, basename, fsPath: file });
                     }
                 }
             }
@@ -232,29 +247,32 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const config = new config_helper_1.ConfigHelper();
+            // ATTENTION: the provider options may contain sensitive information
             core.debug(`provider options: ${JSON.stringify(config.options)}`);
             core.debug(`include patterns: ${JSON.stringify(config.patterns)}`);
+            core.debug(`flatten: ${config.flatten}`);
             core.startGroup(`Upload files to ${config.provider} start`);
             const op = new opendal_1.Operator(config.provider, config.options);
             const pathSpec = yield (0, glob_helper_1.includeFiles)(config.patterns);
             core.debug(`path spec: ${JSON.stringify(pathSpec)}`);
             for (const spec of pathSpec) {
                 core.debug(`upload file: ${spec.fsPath}`);
+                if (config.flatten) {
+                    core.info(`direct upload file: ${spec.basename}`);
+                    yield op.write(spec.basename, fs.readFileSync(spec.fsPath));
+                    continue;
+                }
                 core.info(`upload file: ${spec.path} to ${spec.dir}`);
                 // ensure the upload directory exists, relative path from search path
                 if (spec.dir) {
                     core.debug(`ensure the upload directory exists: ${spec.dir}`);
-                    // openDAL need the directory path end with '/'
-                    let dir = spec.dir;
-                    if (!dir.endsWith('/')) {
-                        dir = `${dir}/`;
-                    }
-                    yield op.createDir(dir);
+                    yield op.createDir(spec.dir);
                 }
                 // upload file
                 yield op.write(spec.path, fs.readFileSync(spec.fsPath));
             }
             core.endGroup();
+            return op;
         }
         catch (error) {
             core.error(`Upload files failed: ${error}`);

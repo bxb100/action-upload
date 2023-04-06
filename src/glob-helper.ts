@@ -32,6 +32,11 @@ export const includeFiles = async (patterns: string[]): Promise<PathSpec[]> => {
   core.debug(`search paths: ${searchPaths}`)
   const paths: PathSpec[] = []
   for await (const file of globber.globGenerator()) {
+    // exclude .DS_Store
+    if (file.endsWith('.DS_Store')) {
+      continue
+    }
+
     // according to the `@action/glob` rule, the getSearchPaths may return multiple
     for (const base of searchPaths) {
       if (file.startsWith(base)) {
