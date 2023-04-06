@@ -13,12 +13,14 @@ A GitHub Action for uploading files to S3/FTP/WebDAV and <a href="https://docs.r
 
 > currently, the action only supports **Linux-x64** platform
 
-| Input            | Description                                                                                                                                | Default |
-|------------------|--------------------------------------------------------------------------------------------------------------------------------------------|---------|
-| provider         | The uploader name                                                                                                                          | -       |
-| provider_options | Newline-delimited list of the uploader options<br/>🐾 You can learn more about multi-line YAML syntax [here](https://yaml-multiline.info/) | -       |
-| include          | Newline-delimited list of the glob pattern [^1]                                                                                            | -       |
-| flatten          | flatten the upload path                                                                                                                    | false   |
+## :writing_hand: All Parameters
+
+| Input              | Description                                                                                                                                | Default |
+|:-------------------|:-------------------------------------------------------------------------------------------------------------------------------------------|:--------|
+| `provider`         | The uploader name                                                                                                                          | -       |
+| `provider_options` | Newline-delimited list of the uploader options<br/>🐾 You can learn more about multi-line YAML syntax [here](https://yaml-multiline.info/) | -       |
+| `include`          | Newline-delimited list of the glob pattern [^1]                                                                                            | -       |
+| `flatten`          | flatten the upload path                                                                                                                    | false   |
 
 ## Providers
 
