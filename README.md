@@ -2,7 +2,7 @@
   :outbox_tray: :octocat:
 </div>
 <h1 align="center">
-  Uniform Uploader 
+Uniform Uploader 
 </h1>
 <p align="center">
 A GitHub Action for uploading files to S3/FTP/WebDAV and <a href="https://docs.rs/opendal/latest/opendal/services/index.html">more</a>, powered by <a href="https://github.com/apache/incubator-opendal">Apache OpenDAL</a>
@@ -12,7 +12,13 @@ A GitHub Action for uploading files to S3/FTP/WebDAV and <a href="https://docs.r
 </p>
 
 > currently, the action only supports **Linux-x64** platform
->
+
+| Input            | Description                                                                                                                                | Default |
+|------------------|--------------------------------------------------------------------------------------------------------------------------------------------|---------|
+| provider         | The uploader name                                                                                                                          | -       |
+| provider_options | Newline-delimited list of the uploader options<br/>🐾 You can learn more about multi-line YAML syntax [here](https://yaml-multiline.info/) | -       |
+| include          | Newline-delimited list of the glob pattern [^1]                                                                                            | -       |
+| flatten          | flatten the upload path                                                                                                                    | false   |
 
 ## Providers
 
@@ -121,7 +127,7 @@ Azure Storage Blob services support.
 
 ### JetBrains IDE
 
-Using `sitespeedio/node:ubuntu-22.04-nodejs-18.14.2` as node interpreter[^1]
+Using `sitespeedio/node:ubuntu-22.04-nodejs-18.14.2` as node interpreter[^2]
 
 ```bash
 docker pull sitespeedio/node:ubuntu-22.04-nodejs-18.14.2 --platform "linux/amd64"
@@ -132,4 +138,6 @@ docker pull sitespeedio/node:ubuntu-22.04-nodejs-18.14.2 --platform "linux/amd64
 1. compile project [openDAL](https://github.com/apache/incubator-opendal) nodejs binding
 2. copy binary `opendal.darwin-arm64.node` to `node_modules/opendal` and `lib` folder
 
-[^1]:  https://www.jetbrains.com/help/idea/node-js-interpreters.html#ws_node_interpreters_dialog_open
+[^1]: https://github.com/actions/toolkit/tree/main/packages/glob
+
+[^2]:  https://www.jetbrains.com/help/idea/node-js-interpreters.html#ws_node_interpreters_dialog_open
