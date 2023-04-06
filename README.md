@@ -13,7 +13,7 @@ A GitHub Action for uploading files to S3/FTP/WebDAV and <a href="https://docs.r
 
 > currently, the action only supports **Linux-x64** platform
 
-## :writing_hand: All Parameters
+## All Parameters
 
 | Input              | Description                                                                                                                                | Default |
 |:-------------------|:-------------------------------------------------------------------------------------------------------------------------------------------|:--------|
