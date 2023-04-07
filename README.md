@@ -127,13 +127,19 @@ Azure Storage Blob services support.
 
 ## Dev (Apple silicon)
 
-### JetBrains IDE
+> Not using Webstorm node interpreter on VM with nvm, the mess config seems not have right one.
+
+### JetBrains IDE (Not preferred)
 
 Using `sitespeedio/node:ubuntu-22.04-nodejs-18.14.2` as node interpreter[^2]
 
 ```bash
 docker pull sitespeedio/node:ubuntu-22.04-nodejs-18.14.2 --platform "linux/amd64"
 ```
+
+### VM
+
+using [orb](https://orbstack.dev/) x86_64 VM with nvm
 
 ### Manual
 
