@@ -11,6 +11,8 @@ A GitHub Action for uploading files to S3/FTP/WebDAV and <a href="https://docs.r
 <p align="right">
 </p>
 
+> **Note**
+>
 > currently, the action only supports **Linux-x64** platform
 
 ## All Parameters

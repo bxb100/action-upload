@@ -2,7 +2,6 @@ import * as cp from 'child_process'
 import * as path from 'path'
 import {afterAll, beforeEach, describe, expect, jest, test} from '@jest/globals'
 import {run} from '../src/main'
-import {Operator} from 'opendal'
 
 describe('test basic function', () => {
   const OLD_ENV = process.env
