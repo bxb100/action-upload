@@ -23,7 +23,9 @@ export class ConfigHelper {
       })
       .filter((option: string) => option !== '')
     for (const option of provider_options) {
-      const [key, value] = option.split('=')
+      const eqIndex = option.indexOf("=")
+      const key = option.slice(0, eqIndex)
+      const value = option.slice(eqIndex + 1)
       this._options[key.trim()] = value.trim()
     }
     // include file patterns

@@ -7,10 +7,13 @@ import {includeFiles} from './glob-helper'
 export async function run(): Promise<Operator | undefined> {
   try {
     const config = new ConfigHelper()
-    // ATTENTION: the provider options may contain sensitive information
-    core.debug(`provider options: ${JSON.stringify(config.options)}`)
-    core.debug(`include patterns: ${JSON.stringify(config.patterns)}`)
-    core.debug(`flatten: ${config.flatten}`)
+
+    {
+      // ATTENTION: the provider options may contain sensitive information
+      core.debug(`provider options: ${JSON.stringify(config.options)}`)
+      core.debug(`include patterns: ${JSON.stringify(config.patterns)}`)
+      core.debug(`flatten: ${config.flatten}`)
+    }
 
     core.startGroup(`Upload files to ${config.provider} start`)
 

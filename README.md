@@ -17,12 +17,14 @@ A GitHub Action for uploading files to S3/FTP/WebDAV and <a href="https://docs.r
 
 ## All Parameters
 
-| Input              | Description                                                                                                                                | Default |
-|:-------------------|:-------------------------------------------------------------------------------------------------------------------------------------------|:--------|
-| `provider`         | The uploader name                                                                                                                          | -       |
-| `provider_options` | Newline-delimited list of the uploader options<br/>🐾 You can learn more about multi-line YAML syntax [here](https://yaml-multiline.info/) | -       |
-| `include`          | Newline-delimited list of the glob pattern [^1]                                                                                            | -       |
-| `flatten`          | flatten the upload path                                                                                                                    | false   |
+| Input              | Description                                                                  | Default |
+|:-------------------|:-----------------------------------------------------------------------------|:--------|
+| `provider`         | The uploader name                                                            | -       |
+| `provider_options` | Newline-delimited list of the uploader options<br/> using `key=value` format | -       |
+| `include`          | Newline-delimited list of the glob pattern [^1]                              | -       |
+| `flatten`          | flatten the upload path                                                      | false   |
+
+> 🐾 You can learn more about multi-line YAML syntax [here](https://yaml-multiline.info/)
 
 ## Providers
 
@@ -62,10 +64,10 @@ A GitHub Action for uploading files to S3/FTP/WebDAV and <a href="https://docs.r
   with:
     provider: webdav
     provider_options: |
-      endpoint: ${{ secrets.WEBDAV_ENDPOINT }}
-      username: ${{ secrets.WEBDAV_USERNAME }}
-      password: ${{ secrets.WEBDAV_PASSWORD }}
-      root: /test/
+      endpoint=${{ secrets.WEBDAV_ENDPOINT }}
+      username=${{ secrets.WEBDAV_USERNAME }}
+      password=${{ secrets.WEBDAV_PASSWORD }}
+      root=/test/
     include: '__tests__/**'
 ```
 
