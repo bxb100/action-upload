@@ -11,10 +11,6 @@ A GitHub Action for uploading files to S3/FTP/WebDAV and <a href="https://docs.r
 <p align="right">
 </p>
 
-> **Note**
->
-> currently, the action only supports **Linux-x64** platform
-
 ## All Parameters
 
 | Input              | Description                                                                  | Default |
@@ -129,27 +125,5 @@ Azure Storage Blob services support.
 
 </details>
 
-## Dev (Apple silicon)
-
-> Not using Webstorm node interpreter on VM with nvm, the mess config seems not have right one.
-
-### JetBrains IDE (Not preferred)
-
-Using `sitespeedio/node:ubuntu-22.04-nodejs-18.14.2` as node interpreter[^2]
-
-```bash
-docker pull sitespeedio/node:ubuntu-22.04-nodejs-18.14.2 --platform "linux/amd64"
-```
-
-### VM
-
-using [orb](https://orbstack.dev/) x86_64 VM with nvm
-
-### Manual
-
-1. compile project [openDAL](https://github.com/apache/incubator-opendal) nodejs binding
-2. copy binary `opendal.darwin-arm64.node` to `node_modules/opendal` and `lib` folder
 
 [^1]: https://github.com/actions/toolkit/tree/main/packages/glob
-
-[^2]:  https://www.jetbrains.com/help/idea/node-js-interpreters.html#ws_node_interpreters_dialog_open
