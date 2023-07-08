@@ -1,10 +1,10 @@
 require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 3050:
+/***/ 1886:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-module.exports = require(__nccwpck_require__.ab + "opendal.linux-x64-gnu.node")
+module.exports = require(__nccwpck_require__.ab + "opendal.darwin-arm64.node")
 
 /***/ }),
 
@@ -57,7 +57,9 @@ class ConfigHelper {
         })
             .filter((option) => option !== '');
         for (const option of provider_options) {
-            const [key, value] = option.split('=');
+            const eqIndex = option.indexOf("=");
+            const key = option.slice(0, eqIndex);
+            const value = option.slice(eqIndex + 1);
             this._options[key.trim()] = value.trim();
         }
         // include file patterns
@@ -247,10 +249,12 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const config = new config_helper_1.ConfigHelper();
-            // ATTENTION: the provider options may contain sensitive information
-            core.debug(`provider options: ${JSON.stringify(config.options)}`);
-            core.debug(`include patterns: ${JSON.stringify(config.patterns)}`);
-            core.debug(`flatten: ${config.flatten}`);
+            {
+                // ATTENTION: the provider options may contain sensitive information
+                core.debug(`provider options: ${JSON.stringify(config.options)}`);
+                core.debug(`include patterns: ${JSON.stringify(config.patterns)}`);
+                core.debug(`flatten: ${config.flatten}`);
+            }
             core.startGroup(`Upload files to ${config.provider} start`);
             const op = new opendal_1.Operator(config.provider, config.options);
             const pathSpec = yield (0, glob_helper_1.includeFiles)(config.patterns);
@@ -4668,7 +4672,7 @@ switch (platform) {
           if (localFileExisted) {
             nativeBinding = __nccwpck_require__(4922)
           } else {
-            nativeBinding = __nccwpck_require__(1346)
+            nativeBinding = __nccwpck_require__(1886)
           }
         } catch (e) {
           loadError = e
@@ -4717,7 +4721,7 @@ switch (platform) {
             if (localFileExisted) {
               nativeBinding = __nccwpck_require__(5700)
             } else {
-              nativeBinding = __nccwpck_require__(3050)
+              nativeBinding = __nccwpck_require__(7833)
             }
           } catch (e) {
             loadError = e
@@ -5878,14 +5882,6 @@ module.exports = eval("require")("@opendal/lib-android-arm64");
 
 /***/ }),
 
-/***/ 1346:
-/***/ ((module) => {
-
-module.exports = eval("require")("@opendal/lib-darwin-arm64");
-
-
-/***/ }),
-
 /***/ 8626:
 /***/ ((module) => {
 
@@ -5930,6 +5926,14 @@ module.exports = eval("require")("@opendal/lib-linux-arm64-gnu");
 /***/ ((module) => {
 
 module.exports = eval("require")("@opendal/lib-linux-arm64-musl");
+
+
+/***/ }),
+
+/***/ 7833:
+/***/ ((module) => {
+
+module.exports = eval("require")("@opendal/lib-linux-x64-gnu");
 
 
 /***/ }),
