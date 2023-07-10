@@ -53,7 +53,13 @@ export const includeFiles = async (patterns: string[]): Promise<PathSpec[]> => {
         }
         const basename = file.substring(file.lastIndexOf(separate) + 1)
         const path = file.substring(base.length + 1)
-        paths.push({dir, path, basename, fsPath: file})
+        paths.push({
+          // webdav need the directory path end with '/'
+          dir: dir.replace(/\\/g, '/'),
+          path: path.replace(/\\/g, '/'),
+          basename,
+          fsPath: file
+        })
       }
     }
   }
