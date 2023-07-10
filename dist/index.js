@@ -180,7 +180,7 @@ const includeFiles = (patterns) => __awaiter(void 0, void 0, void 0, function* (
                         let dir = file.substring(base.length, file.lastIndexOf(separate));
                         if (dir) {
                             // openDAL need the directory path end with '/'
-                            dir = `${dir}${separate}`;
+                            dir = `${dir}/`;
                         }
                         const basename = file.substring(file.lastIndexOf(separate) + 1);
                         const path = file.substring(base.length + 1);
