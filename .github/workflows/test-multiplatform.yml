@@ -1,0 +1,22 @@
+name: 'local test in multiplatform'
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-latest, windows-latest ]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./
+        with:
+          provider: webdav
+          # bug 1: not support create dir in the root webdav path, not sure is that only occurs in jianguoyun
+          provider_options: |
+            endpoint=https://dav.jianguoyun.com/dav
+            username=${{secrets.webdav_username}}
+            password=${{secrets.webdav_password}}
+            root=/openDAL/
+          include: '__tests__/**'
