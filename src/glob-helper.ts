@@ -1,5 +1,7 @@
 import * as core from '@actions/core'
 import * as glob from '@actions/glob'
+import * as os from 'os'
+import { platform } from "os";
 
 const patterSplit = (
   patterns: string[]
@@ -31,6 +33,10 @@ export const includeFiles = async (patterns: string[]): Promise<PathSpec[]> => {
   const searchPaths = globber.getSearchPaths()
   core.debug(`search paths: ${searchPaths}`)
   const paths: PathSpec[] = []
+  let separate = '/'
+  if (os.platform() === 'win32') {
+    separate = '\\'
+  }
   for await (const file of globber.globGenerator()) {
     // exclude .DS_Store
     if (file.endsWith('.DS_Store')) {
@@ -40,12 +46,12 @@ export const includeFiles = async (patterns: string[]): Promise<PathSpec[]> => {
     // according to the `@action/glob` rule, the getSearchPaths may return multiple
     for (const base of searchPaths) {
       if (file.startsWith(base)) {
-        let dir = file.substring(base.length, file.lastIndexOf('/'))
+        let dir = file.substring(base.length, file.lastIndexOf(separate))
         if (dir) {
           // openDAL need the directory path end with '/'
-          dir = `${dir}/`
+          dir = `${dir}${separate}`
         }
-        const basename = file.substring(file.lastIndexOf('/') + 1)
+        const basename = file.substring(file.lastIndexOf(separate) + 1)
         const path = file.substring(base.length + 1)
         paths.push({dir, path, basename, fsPath: file})
       }
