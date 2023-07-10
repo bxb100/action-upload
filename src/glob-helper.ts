@@ -45,6 +45,7 @@ export const includeFiles = async (patterns: string[]): Promise<PathSpec[]> => {
 
     // according to the `@action/glob` rule, the getSearchPaths may return multiple
     for (const base of searchPaths) {
+      core.debug(`base: ${base}; file: ${file}`)
       if (file.startsWith(base)) {
         let dir = file.substring(base.length, file.lastIndexOf(separate))
         if (dir) {
