@@ -137,6 +137,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.includeFiles = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const glob = __importStar(__nccwpck_require__(8090));
+const os = __importStar(__nccwpck_require__(2037));
 const patterSplit = (patterns) => {
     const includes = [];
     const excludes = [];
@@ -158,6 +159,10 @@ const includeFiles = (patterns) => __awaiter(void 0, void 0, void 0, function* (
     const searchPaths = globber.getSearchPaths();
     core.debug(`search paths: ${searchPaths}`);
     const paths = [];
+    let separate = '/';
+    if (os.platform() === 'win32') {
+        separate = '\\';
+    }
     try {
         for (var _d = true, _e = __asyncValues(globber.globGenerator()), _f; _f = yield _e.next(), _a = _f.done, !_a;) {
             _c = _f.value;
@@ -170,13 +175,14 @@ const includeFiles = (patterns) => __awaiter(void 0, void 0, void 0, function* (
                 }
                 // according to the `@action/glob` rule, the getSearchPaths may return multiple
                 for (const base of searchPaths) {
+                    core.debug(`base: ${base}; file: ${file}`);
                     if (file.startsWith(base)) {
-                        let dir = file.substring(base.length, file.lastIndexOf('/'));
+                        let dir = file.substring(base.length, file.lastIndexOf(separate));
                         if (dir) {
                             // openDAL need the directory path end with '/'
-                            dir = `${dir}/`;
+                            dir = `${dir}${separate}`;
                         }
-                        const basename = file.substring(file.lastIndexOf('/') + 1);
+                        const basename = file.substring(file.lastIndexOf(separate) + 1);
                         const path = file.substring(base.length + 1);
                         paths.push({ dir, path, basename, fsPath: file });
                     }

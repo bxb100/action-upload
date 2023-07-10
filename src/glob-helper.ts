@@ -1,7 +1,6 @@
 import * as core from '@actions/core'
 import * as glob from '@actions/glob'
 import * as os from 'os'
-import { platform } from "os";
 
 const patterSplit = (
   patterns: string[]
