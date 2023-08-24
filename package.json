@@ -30,7 +30,7 @@
     "opendal": "^0.38.0"
   },
   "devDependencies": {
-    "@jest/globals": "^27.5.1",
+    "@jest/globals": "^29.6.4",
     "@types/node": "^18.16.19",
     "@typescript-eslint/parser": "^5.61.0",
     "@vercel/ncc": "^0.36.1",
