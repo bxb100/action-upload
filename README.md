@@ -103,6 +103,7 @@ Aws S3 and compatible services (including minio, digitalocean space and so on) s
     provider_options: |
       root=/cs
       bucket=action-upload-test
+      region=auto
       endpoint=https://${{secrets.CLOUDFLARE_R2_ACCOUNTID}}.r2.cloudflarestorage.com
       access_key_id=${{secrets.CLOUDFLARE_R2_KEY}}
       secret_access_key=${{secrets.CLOUDFLARE_R2_SECRET}}
