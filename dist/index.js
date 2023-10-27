@@ -39,6 +39,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ConfigHelper = void 0;
 const core = __importStar(__nccwpck_require__(2186));
+function trim_quote(pattern, quote) {
+    if (pattern.startsWith(quote) && pattern.endsWith(quote)) {
+        return pattern.slice(1, -1);
+    }
+    return pattern;
+}
 class ConfigHelper {
     constructor() {
         // provider
@@ -55,7 +61,9 @@ class ConfigHelper {
             .getMultilineInput('provider_options', {
             required: false
         })
-            .filter((option) => option !== '');
+            .filter((option) => option !== '')
+            .map((option) => trim_quote(option, '"'))
+            .map((option) => trim_quote(option, "'"));
         for (const option of provider_options) {
             const eqIndex = option.indexOf('=');
             const key = option.slice(0, eqIndex);
@@ -63,10 +71,13 @@ class ConfigHelper {
             this._options[key.trim()] = value.trim();
         }
         // include file patterns
-        this._patterns = core.getMultilineInput('include', {
+        this._patterns = core
+            .getMultilineInput('include', {
             required: true,
             trimWhitespace: true
-        });
+        })
+            .map((option) => trim_quote(option, '"'))
+            .map((option) => trim_quote(option, "'"));
         this._flatten = core.getBooleanInput('flatten', {
             required: false
         });

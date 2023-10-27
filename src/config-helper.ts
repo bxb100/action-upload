@@ -1,5 +1,12 @@
 import * as core from '@actions/core'
 
+function trim_quote(pattern: string, quote: string): string {
+  if (pattern.startsWith(quote) && pattern.endsWith(quote)) {
+    return pattern.slice(1, -1)
+  }
+  return pattern
+}
+
 export class ConfigHelper {
   private readonly _provider: string
   private readonly _options: Record<string, string>
@@ -22,6 +29,9 @@ export class ConfigHelper {
         required: false
       })
       .filter((option: string) => option !== '')
+      .map((option: string) => trim_quote(option, '"'))
+      .map((option: string) => trim_quote(option, "'"))
+
     for (const option of provider_options) {
       const eqIndex = option.indexOf('=')
       const key = option.slice(0, eqIndex)
@@ -29,10 +39,13 @@ export class ConfigHelper {
       this._options[key.trim()] = value.trim()
     }
     // include file patterns
-    this._patterns = core.getMultilineInput('include', {
-      required: true,
-      trimWhitespace: true
-    })
+    this._patterns = core
+      .getMultilineInput('include', {
+        required: true,
+        trimWhitespace: true
+      })
+      .map((option: string) => trim_quote(option, '"'))
+      .map((option: string) => trim_quote(option, "'"))
 
     this._flatten = core.getBooleanInput('flatten', {
       required: false
