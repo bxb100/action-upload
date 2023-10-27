@@ -9,3 +9,25 @@ exports[`github issue 110 - __test__ dir 1`] = `
   "main.test.ts",
 ]
 `;
+
+exports[`github issue 110 - workspace 1`] = `
+[
+  ".eslintignore",
+  ".eslintrc.json",
+  ".gitattributes",
+  ".gitignore",
+  ".prettierignore",
+  ".prettierrc.json",
+  "LICENSE",
+  "README.md",
+  "action.yml",
+  "download_binary.sh",
+  "jest.config.js",
+  "package-lock.json",
+  "package.json",
+  "src/config-helper.ts",
+  "src/glob-helper.ts",
+  "src/main.ts",
+  "tsconfig.json",
+]
+`;
