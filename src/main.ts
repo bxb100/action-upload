@@ -10,6 +10,7 @@ export async function run(): Promise<Operator | undefined> {
 
     {
       // ATTENTION: the provider options may contain sensitive information
+      core.debug(`provider: ${config.provider}`)
       core.debug(`provider options: ${JSON.stringify(config.options)}`)
       core.debug(`include patterns: ${JSON.stringify(config.patterns)}`)
       core.debug(`flatten: ${config.flatten}`)

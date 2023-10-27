@@ -258,6 +258,7 @@ function run() {
             const config = new config_helper_1.ConfigHelper();
             {
                 // ATTENTION: the provider options may contain sensitive information
+                core.debug(`provider: ${config.provider}`);
                 core.debug(`provider options: ${JSON.stringify(config.options)}`);
                 core.debug(`include patterns: ${JSON.stringify(config.patterns)}`);
                 core.debug(`flatten: ${config.flatten}`);

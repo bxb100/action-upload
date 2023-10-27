@@ -3,6 +3,14 @@ import * as path from 'path'
 import {afterAll, beforeEach, describe, expect, jest, test} from '@jest/globals'
 import {run} from '../src/main'
 
+function getVariableKey(name: string) {
+  return name.replace(/\./g, '_').replace(/ /g, '_').toUpperCase()
+}
+
+function setInput(key: string, val: string) {
+  process.env['INPUT_' + getVariableKey(key)] = val
+}
+
 describe('test basic function', () => {
   const OLD_ENV = process.env
 
@@ -17,23 +25,22 @@ describe('test basic function', () => {
 
   // shows how the runner will run a javascript action with env / stdout protocol
   test('test runs', () => {
-    process.env['INPUT_PROVIDER'] = 'memory'
-    process.env['INPUT_PROVIDER_OPTIONS'] = ''
-    process.env['INPUT_INCLUDE'] = '__tests__/**/temp'
-    process.env['INPUT_FLATTEN'] = 'true'
+    setInput('provider', 'memory')
+    setInput('provider_options', '')
+    setInput('include', '__tests__/**/temp')
+    setInput('flatten', 'true')
+
     const np = process.execPath
     const ip = path.join(__dirname, '..', 'lib', 'main.js')
-    const options: cp.ExecFileSyncOptions = {
-      env: process.env
-    }
-    console.log(cp.execFileSync(np, [ip], options).toString())
+
+    console.log(cp.execFileSync(np, [ip], {env: process.env}).toString())
   })
 
   test('test openDAL memory', async () => {
-    process.env['INPUT_PROVIDER'] = 'memory'
-    process.env['INPUT_PROVIDER_OPTIONS'] = ''
-    process.env['INPUT_INCLUDE'] = '__tests__/**/temp'
-    process.env['INPUT_FLATTEN'] = 'true'
+    setInput('provider', 'memory')
+    setInput('provider_options', '')
+    setInput('include', '__tests__/**/temp')
+    setInput('flatten', 'true')
 
     const op = await run()
     const content = await op!.read('temp')
