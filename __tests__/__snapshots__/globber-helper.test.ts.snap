@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`github issue 110 - __test__ dir 1`] = `
+[
+  "__snapshots__/globber-helper.test.ts.snap",
+  "config-helper.test.ts",
+  "fixture/temp",
+  "globber-helper.test.ts",
+  "main.test.ts",
+]
+`;
