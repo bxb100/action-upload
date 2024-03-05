@@ -3,12 +3,12 @@ import * as path from 'path'
 import {afterAll, beforeEach, describe, expect, jest, test} from '@jest/globals'
 import {run} from '../src/main'
 
-function getVariableKey(name: string) {
+function getVariableKey(name: string): string {
   return name.replace(/\./g, '_').replace(/ /g, '_').toUpperCase()
 }
 
-function setInput(key: string, val: string) {
-  process.env['INPUT_' + getVariableKey(key)] = val
+function setInput(key: string, val: string): void {
+  process.env[`INPUT_${getVariableKey(key)}`] = val
 }
 
 describe('test basic function', () => {
@@ -33,7 +33,7 @@ describe('test basic function', () => {
     const np = process.execPath
     const ip = path.join(__dirname, '..', 'lib', 'main.js')
 
-    console.log(cp.execFileSync(np, [ip], {env: process.env}).toString())
+    cp.execFileSync(np, [ip], {env: process.env}).toString()
   })
 
   test('test openDAL memory', async () => {
@@ -43,8 +43,8 @@ describe('test basic function', () => {
     setInput('flatten', 'true')
 
     const op = await run()
-    const content = await op!.read('temp')
-    expect(content.toString().trim()).toEqual(
+    const content = await op?.read('temp')
+    expect(content?.toString().trim()).toEqual(
       'this test file for action-upload'
     )
   })

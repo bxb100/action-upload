@@ -47,4 +47,5 @@ export async function run(): Promise<Operator | undefined> {
   }
 }
 
-run()
+// fix test child process not passing env caused print error message
+if (process.env.NODE_ENV !== 'test') run()

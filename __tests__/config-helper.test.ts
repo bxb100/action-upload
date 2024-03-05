@@ -1,6 +1,6 @@
 import {test} from '@jest/globals'
 import {ConfigHelper} from '../src/config-helper'
-import assert = require('assert')
+import assert from 'node:assert'
 
 test('test runs', () => {
   process.env['INPUT_PROVIDER'] = 'memory'

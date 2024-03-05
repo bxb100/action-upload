@@ -1,14 +1,14 @@
 import {expect, test} from '@jest/globals'
 import {includeFiles} from '../src/glob-helper'
-import assert = require('assert')
+import assert from 'node:assert'
 import * as path from 'path'
 
 test('test glob', async () => {
   const patterns = ['__tests__/']
   const file = await includeFiles(patterns)
   assert(file.length > 0)
-  for (let pathSpec of file) {
-    console.log(pathSpec)
+  for (const pathSpec of file) {
+    // console.log(pathSpec)
     assert.equal(path.join(__dirname, pathSpec.path), pathSpec.fsPath)
   }
 })
@@ -22,7 +22,7 @@ test('test double asterisk', async () => {
 
   assert.deepEqual(file, file2)
 
-  for (let pathSpec of file) {
+  for (const pathSpec of file) {
     assert(pathSpec.dir)
   }
 }, 100000)
