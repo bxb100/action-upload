@@ -4625,7 +4625,7 @@ function isMusl() {
   // For Node 10
   if (!process.report || typeof process.report.getReport !== 'function') {
     try {
-      const lddPath = (__nccwpck_require__(2081).execSync)('which ldd').toString().trim();
+      const lddPath = (__nccwpck_require__(2081).execSync)('which ldd').toString().trim()
       return readFileSync(lddPath, 'utf8').includes('musl')
     } catch (e) {
       return true
@@ -4845,6 +4845,35 @@ switch (platform) {
           loadError = e
         }
         break
+      case 'riscv64':
+        if (isMusl()) {
+          localFileExisted = existsSync(
+            join(__dirname, 'opendal.linux-riscv64-musl.node')
+          )
+          try {
+            if (localFileExisted) {
+              nativeBinding = __nccwpck_require__(1868)
+            } else {
+              nativeBinding = __nccwpck_require__(527)
+            }
+          } catch (e) {
+            loadError = e
+          }
+        } else {
+          localFileExisted = existsSync(
+            join(__dirname, 'opendal.linux-riscv64-gnu.node')
+          )
+          try {
+            if (localFileExisted) {
+              nativeBinding = __nccwpck_require__(7488)
+            } else {
+              nativeBinding = __nccwpck_require__(4207)
+            }
+          } catch (e) {
+            loadError = e
+          }
+        }
+        break
       default:
         throw new Error(`Unsupported architecture on Linux: ${arch}`)
     }
@@ -4860,13 +4889,20 @@ if (!nativeBinding) {
   throw new Error(`Failed to load native binding`)
 }
 
-const { Operator, Entry, Metadata, Lister, BlockingLister } = nativeBinding
+const { Capability, Operator, Entry, Metadata, BlockingReader, Reader, BlockingWriter, Writer, Lister, BlockingLister, Layer, RetryLayer } = nativeBinding
 
+module.exports.Capability = Capability
 module.exports.Operator = Operator
 module.exports.Entry = Entry
 module.exports.Metadata = Metadata
+module.exports.BlockingReader = BlockingReader
+module.exports.Reader = Reader
+module.exports.BlockingWriter = BlockingWriter
+module.exports.Writer = Writer
 module.exports.Lister = Lister
 module.exports.BlockingLister = BlockingLister
+module.exports.Layer = Layer
+module.exports.RetryLayer = RetryLayer
 
 
 /***/ }),
@@ -4895,9 +4931,128 @@ module.exports.BlockingLister = BlockingLister
 
 /// <reference types="node" />
 
-const { Operator } = __nccwpck_require__(2381)
+const { Writable, Readable } = __nccwpck_require__(4492)
+
+class ReadStream extends Readable {
+  constructor(reader, options) {
+    super(options)
+    this.reader = reader
+  }
+
+  _read(size) {
+    const buf = Buffer.alloc(size)
+    this.reader
+      .read(buf)
+      .then((s) => {
+        if (s === 0n) {
+          this.push(null)
+        } else {
+          this.push(buf.subarray(0, Number(s)))
+        }
+      })
+      .catch((e) => {
+        this.emit('error', e)
+      })
+  }
+}
+
+class BlockingReadStream extends Readable {
+  constructor(reader, options) {
+    super(options)
+    this.reader = reader
+  }
+
+  _read(size) {
+    try {
+      const buf = Buffer.alloc(size)
+      let s = this.reader.read(buf)
+      if (s === 0n) {
+        this.push(null)
+      } else {
+        this.push(buf.subarray(0, Number(s)))
+      }
+    } catch (e) {
+      this.emit('error', e)
+    }
+  }
+}
+
+class WriteStream extends Writable {
+  constructor(writer, options) {
+    super(options)
+    this.writer = writer
+  }
+
+  _write(chunk, encoding, callback) {
+    this.writer
+      .write(chunk)
+      .then(() => {
+        callback()
+      })
+      .catch((e) => {
+        callback(e)
+      })
+  }
+
+  _final(callback) {
+    this.writer
+      .close()
+      .then(() => {
+        callback()
+      })
+      .catch((e) => {
+        callback(e)
+      })
+  }
+}
+
+class BlockingWriteStream extends Writable {
+  constructor(writer, options) {
+    super(options)
+    this.writer = writer
+  }
+
+  _write(chunk, encoding, callback) {
+    try {
+      this.writer.write(chunk)
+      callback()
+    } catch (e) {
+      callback(e)
+    }
+  }
+
+  _final(callback) {
+    try {
+      this.writer.close()
+      callback()
+    } catch (e) {
+      callback(e)
+    }
+  }
+}
+
+const { Operator, RetryLayer, BlockingReader, Reader, BlockingWriter, Writer } = __nccwpck_require__(2381)
+
+BlockingReader.prototype.createReadStream = function (options) {
+  return new BlockingReadStream(this, options)
+}
+
+Reader.prototype.createReadStream = function (options) {
+  return new ReadStream(this, options)
+}
+
+BlockingWriter.prototype.createWriteStream = function (options) {
+  return new BlockingWriteStream(this, options)
+}
+
+Writer.prototype.createWriteStream = function (options) {
+  return new WriteStream(this, options)
+}
 
 module.exports.Operator = Operator
+module.exports.layers = {
+  RetryLayer,
+}
 
 
 /***/ }),
@@ -27845,6 +28000,22 @@ module.exports = eval("require")("./opendal.linux-arm64-musl.node");
 
 /***/ }),
 
+/***/ 7488:
+/***/ ((module) => {
+
+module.exports = eval("require")("./opendal.linux-riscv64-gnu.node");
+
+
+/***/ }),
+
+/***/ 1868:
+/***/ ((module) => {
+
+module.exports = eval("require")("./opendal.linux-riscv64-musl.node");
+
+
+/***/ }),
+
 /***/ 5700:
 /***/ ((module) => {
 
@@ -27945,6 +28116,22 @@ module.exports = eval("require")("@opendal/lib-linux-arm64-gnu");
 /***/ ((module) => {
 
 module.exports = eval("require")("@opendal/lib-linux-arm64-musl");
+
+
+/***/ }),
+
+/***/ 4207:
+/***/ ((module) => {
+
+module.exports = eval("require")("@opendal/lib-linux-riscv64-gnu");
+
+
+/***/ }),
+
+/***/ 527:
+/***/ ((module) => {
+
+module.exports = eval("require")("@opendal/lib-linux-riscv64-musl");
 
 
 /***/ }),
