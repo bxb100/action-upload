@@ -1,10 +1,10 @@
 require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 1886:
+/***/ 3050:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-module.exports = require(__nccwpck_require__.ab + "opendal.darwin-arm64.node")
+module.exports = require(__nccwpck_require__.ab + "opendal.linux-x64-gnu.node")
 
 /***/ }),
 
@@ -4746,7 +4746,7 @@ switch (platform) {
           if (localFileExisted) {
             nativeBinding = __nccwpck_require__(4922)
           } else {
-            nativeBinding = __nccwpck_require__(1886)
+            nativeBinding = __nccwpck_require__(1346)
           }
         } catch (e) {
           loadError = e
@@ -4795,7 +4795,7 @@ switch (platform) {
             if (localFileExisted) {
               nativeBinding = __nccwpck_require__(5700)
             } else {
-              nativeBinding = __nccwpck_require__(7833)
+              nativeBinding = __nccwpck_require__(3050)
             }
           } catch (e) {
             loadError = e
@@ -28072,6 +28072,14 @@ module.exports = eval("require")("@opendal/lib-android-arm64");
 
 /***/ }),
 
+/***/ 1346:
+/***/ ((module) => {
+
+module.exports = eval("require")("@opendal/lib-darwin-arm64");
+
+
+/***/ }),
+
 /***/ 8626:
 /***/ ((module) => {
 
@@ -28132,14 +28140,6 @@ module.exports = eval("require")("@opendal/lib-linux-riscv64-gnu");
 /***/ ((module) => {
 
 module.exports = eval("require")("@opendal/lib-linux-riscv64-musl");
-
-
-/***/ }),
-
-/***/ 7833:
-/***/ ((module) => {
-
-module.exports = eval("require")("@opendal/lib-linux-x64-gnu");
 
 
 /***/ }),
