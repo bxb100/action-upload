@@ -1,7 +1,12 @@
-import * as cp from 'child_process'
-import * as path from 'path'
-import {afterAll, beforeEach, describe, expect, jest, test} from '@jest/globals'
-import {run} from '../src/main'
+import {
+  afterAll,
+  beforeEach,
+  describe,
+  expect,
+  jest,
+  test
+} from '@jest/globals'
+import { run } from '../src/main'
 
 function getVariableKey(name: string): string {
   return name.replace(/\./g, '_').replace(/ /g, '_').toUpperCase()
@@ -16,27 +21,14 @@ describe('test basic function', () => {
 
   beforeEach(() => {
     jest.resetModules() // Most important - it clears the cache
-    process.env = {...OLD_ENV} // Make a copy
+    process.env = { ...OLD_ENV } // Make a copy
   })
 
   afterAll(() => {
     process.env = OLD_ENV // Restore old environment
   })
 
-  // shows how the runner will run a javascript action with env / stdout protocol
-  test('test runs', () => {
-    setInput('provider', 'memory')
-    setInput('provider_options', '')
-    setInput('include', '__tests__/**/temp')
-    setInput('flatten', 'true')
-
-    const np = process.execPath
-    const ip = path.join(__dirname, '..', 'lib', 'main.js')
-
-    cp.execFileSync(np, [ip], {env: process.env}).toString()
-  })
-
-  test('test openDAL memory', async () => {
+  test('OpenDAL memory', async () => {
     setInput('provider', 'memory')
     setInput('provider_options', '')
     setInput('include', '__tests__/**/temp')

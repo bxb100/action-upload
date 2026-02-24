@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`github issue 110 - __test__ dir 1`] = `
 [
@@ -12,17 +12,29 @@ exports[`github issue 110 - __test__ dir 1`] = `
 
 exports[`github issue 110 - workspace 1`] = `
 [
-  ".eslintignore",
-  ".eslintrc.json",
   ".gitattributes",
   ".gitignore",
   ".prettierignore",
-  ".prettierrc.json",
+  ".prettierrc.yml",
   "LICENSE",
   "README.md",
   "action.yml",
+  "coverage/coverage-summary.json",
+  "coverage/lcov-report/base.css",
+  "coverage/lcov-report/block-navigation.js",
+  "coverage/lcov-report/config-helper.ts.html",
+  "coverage/lcov-report/favicon.png",
+  "coverage/lcov-report/glob-helper.ts.html",
+  "coverage/lcov-report/index.html",
+  "coverage/lcov-report/main.ts.html",
+  "coverage/lcov-report/prettify.css",
+  "coverage/lcov-report/prettify.js",
+  "coverage/lcov-report/sort-arrow-sprite.png",
+  "coverage/lcov-report/sorter.js",
+  "coverage/lcov.info",
   "download_binary.sh",
-  "jest.config.js",
+  "eslint.config.mjs",
+  "jest.config.ts",
   "package-lock.json",
   "package.json",
   "src/config-helper.ts",

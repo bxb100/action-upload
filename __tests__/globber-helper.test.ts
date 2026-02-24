@@ -1,9 +1,11 @@
-import {expect, test} from '@jest/globals'
-import {includeFiles} from '../src/glob-helper'
+import { expect, test } from '@jest/globals'
+import { includeFiles } from '../src/glob-helper'
 import assert from 'node:assert'
 import * as path from 'path'
 
-test('test glob', async () => {
+const __dirname = import.meta.dirname
+
+test('Glob', async () => {
   const patterns = ['__tests__/']
   const file = await includeFiles(patterns)
   assert(file.length > 0)
@@ -13,7 +15,7 @@ test('test glob', async () => {
   }
 })
 
-test('test double asterisk', async () => {
+test('Double asterisk', async () => {
   const patterns = ['**/__tests__/']
   const file = await includeFiles(patterns)
 
@@ -40,12 +42,12 @@ test('github issue 110 - workspace', async () => {
   ]
   const file = await includeFiles(patterns)
 
-  expect(file.map(s => s.path)).toMatchSnapshot()
+  expect(file.map((s) => s.path)).toMatchSnapshot()
 })
 
 test('github issue 110 - __test__ dir', async () => {
   const patterns = ['./__tests__/**', '!./__tests__/exclude/**']
   const file = await includeFiles(patterns)
 
-  expect(file.map(s => s.path)).toMatchSnapshot()
+  expect(file.map((s) => s.path)).toMatchSnapshot()
 })

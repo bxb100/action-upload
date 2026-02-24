@@ -1,8 +1,8 @@
 import * as core from '@actions/core'
 import * as fs from 'fs'
-import {ConfigHelper} from './config-helper'
-import {Operator} from 'opendal'
-import {includeFiles} from './glob-helper'
+import { ConfigHelper } from './config-helper'
+import { Operator } from 'opendal'
+import { includeFiles } from './glob-helper'
 
 export async function run(): Promise<Operator | undefined> {
   try {

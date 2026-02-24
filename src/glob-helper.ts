@@ -4,13 +4,17 @@ import * as os from 'os'
 
 const patterSplit = (
   patterns: string[]
-): {includes: string[]; excludes: string[]} => {
+): { includes: string[]; excludes: string[] } => {
   const includes: string[] = []
   const excludes: string[] = []
   for (const pattern of patterns) {
-    pattern.startsWith('!') ? excludes.push(pattern) : includes.push(pattern)
+    if (pattern.startsWith('!')) {
+      excludes.push(pattern)
+    } else {
+      includes.push(pattern)
+    }
   }
-  return {includes, excludes}
+  return { includes, excludes }
 }
 
 export declare interface PathSpec {
@@ -21,7 +25,7 @@ export declare interface PathSpec {
 }
 
 export const includeFiles = async (patterns: string[]): Promise<PathSpec[]> => {
-  const {includes, excludes} = patterSplit(patterns)
+  const { includes, excludes } = patterSplit(patterns)
   // exclude must be set in the last
   const globber = await glob.create([...includes, ...excludes].join('\n'), {
     followSymbolicLinks: false,
