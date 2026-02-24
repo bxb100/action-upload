@@ -5,7 +5,7 @@ set -e
 mkdir -p temp
 mkdir -p dist
 
-OPENDAL_VERSION=0.45.1
+OPENDAL_VERSION=0.49.2
 
 # download all binary files
 npm pack @opendal/lib-win32-x64-msvc@"$OPENDAL_VERSION" --pack-destination temp

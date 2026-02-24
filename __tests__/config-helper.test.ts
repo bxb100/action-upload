@@ -1,8 +1,8 @@
-import {test} from '@jest/globals'
-import {ConfigHelper} from '../src/config-helper'
+import { test } from '@jest/globals'
+import { ConfigHelper } from '../src/config-helper.js'
 import assert from 'node:assert'
 
-test('test runs', () => {
+test('runs', () => {
   process.env['INPUT_PROVIDER'] = 'memory'
   process.env['INPUT_PROVIDER_OPTIONS'] = `
   A=1
@@ -20,7 +20,7 @@ test('test runs', () => {
 
   const config = new ConfigHelper()
   assert.equal(config.provider, 'memory')
-  assert.deepEqual(config.options, {A: 1, B: 2, C: 3, D: '1=2=3', E: 'E=2'})
+  assert.deepEqual(config.options, { A: 1, B: 2, C: 3, D: '1=2=3', E: 'E=2' })
   assert.deepEqual(config.patterns, ['./**', '!./exclude'])
   assert.equal(config.flatten, true)
 })

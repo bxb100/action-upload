@@ -1,5 +1,6 @@
 name: 'Upload Action'
-description: 'upload file to S3/WebDAV/Hdfs/Ipfs/AliYun OSS/Azure Storage and more'
+description:
+  'upload file to S3/WebDAV/Hdfs/Ipfs/AliYun OSS/Azure Storage and more'
 author: 'Lemon'
 inputs:
   provider:
@@ -7,7 +8,8 @@ inputs:
     required: true
     default: 'Memory'
   provider_options:
-    description: 'Options for the upload provider, formatted as Key=Values per line'
+    description:
+      'Options for the upload provider, formatted as Key=Values per line'
     required: false
     default: ''
   include:
@@ -20,7 +22,7 @@ inputs:
     default: 'false'
 
 runs:
-  using: 'node20'
+  using: node24
   main: 'dist/index.js'
 
 branding:
