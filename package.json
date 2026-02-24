@@ -1,6 +1,6 @@
 {
   "name": "upload-action",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "description": "Uniform Uploader Github Action",
   "type": "module",
@@ -10,7 +10,7 @@
     "format": "prettier --write '**/*.ts'",
     "format-check": "prettier --check '**/*.ts'",
     "lint": "eslint src/**/*.ts",
-    "download": "./download_binary.sh",
+    "download": "./script/download_binary.sh",
     "test": "NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 npx jest",
     "all": "npm run build && npm run format && npm run lint && npm run build && npm test"
   },

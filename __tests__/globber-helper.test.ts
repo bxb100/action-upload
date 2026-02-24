@@ -38,7 +38,9 @@ test('github issue 110 - workspace', async () => {
     '!.git',
     '!.idea',
     '!.github',
-    '!lib'
+    '!lib',
+    // this in gitignore
+    '!coverage/**'
   ]
   const file = await includeFiles(patterns)
 
