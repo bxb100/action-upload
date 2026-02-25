@@ -5,27 +5,36 @@ import * as path from 'path'
 
 const __dirname = import.meta.dirname
 
-test('Glob', async () => {
+test('glob', async () => {
   const patterns = ['__tests__/']
   const file = await includeFiles(patterns)
   assert(file.length > 0)
   for (const pathSpec of file) {
-    // console.log(pathSpec)
-    assert.equal(path.join(__dirname, pathSpec.path), pathSpec.fsPath)
+    expect(pathSpec.file).toBe(
+      path.join(__dirname, pathSpec.parentDir, pathSpec.filename)
+    )
   }
 })
 
-test('Double asterisk', async () => {
+test('fixed search path', async () => {
+  const patterns = [`${__dirname}/fixture/temp`]
+  const file = await includeFiles(patterns)
+  assert(file.length === 1)
+  expect(file[0].dest).toBe('temp')
+  expect(file[0].parentDir).toBeFalsy()
+})
+
+test('double asterisk', async () => {
   const patterns = ['**/__tests__/']
   const file = await includeFiles(patterns)
 
   const patterns2 = ['**/__tests__/**']
   const file2 = await includeFiles(patterns2)
 
-  assert.deepEqual(file, file2)
+  expect(file).toStrictEqual(file2)
 
   for (const pathSpec of file) {
-    assert(pathSpec.dir)
+    expect(pathSpec.parentDir).toBeTruthy()
   }
 }, 100000)
 
@@ -39,17 +48,17 @@ test('github issue 110 - workspace', async () => {
     '!.idea',
     '!.github',
     '!lib',
-    // this in gitignore
-    '!coverage/**'
+    '!coverage/**',
+    '!.env'
   ]
   const file = await includeFiles(patterns)
 
-  expect(file.map((s) => s.path)).toMatchSnapshot()
+  expect(file.map((s) => s.dest)).toMatchSnapshot()
 })
 
 test('github issue 110 - __test__ dir', async () => {
   const patterns = ['./__tests__/**', '!./__tests__/exclude/**']
   const file = await includeFiles(patterns)
 
-  expect(file.map((s) => s.path)).toMatchSnapshot()
+  expect(file.map((s) => s.dest)).toMatchSnapshot()
 })

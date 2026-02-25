@@ -1,6 +1,6 @@
 import * as core from '@actions/core'
 import * as glob from '@actions/glob'
-import * as os from 'os'
+import path from 'node:path'
 
 const patterSplit = (
   patterns: string[]
@@ -17,11 +17,20 @@ const patterSplit = (
   return { includes, excludes }
 }
 
+/**
+ * if we need upload `/local/path/to/file` when search `path/**`
+ * - create directory `to/` in remote
+ * - upload file to `to/file`
+ *
+ * case 1: specific search file
+ * - direct upload file to `file`
+ */
 export declare interface PathSpec {
-  dir: string
-  path: string
-  basename: string
-  fsPath: string
+  file: string
+  filename: string
+  // unix style
+  parentDir: string
+  dest: string
 }
 
 export const includeFiles = async (patterns: string[]): Promise<PathSpec[]> => {
@@ -34,37 +43,36 @@ export const includeFiles = async (patterns: string[]): Promise<PathSpec[]> => {
     omitBrokenSymbolicLinks: true
   })
   const searchPaths = globber.getSearchPaths()
-  core.debug(`search paths: ${searchPaths}`)
   const paths: PathSpec[] = []
-  let separate = '/'
-  if (os.platform() === 'win32') {
-    separate = '\\'
-  }
+
   for await (const file of globber.globGenerator()) {
     // exclude .DS_Store
     if (file.endsWith('.DS_Store')) {
       continue
     }
-
-    // according to the `@action/glob` rule, the getSearchPaths may return multiple
-    for (const base of searchPaths) {
-      core.debug(`base: ${base}; file: ${file}`)
-      if (file.startsWith(base)) {
-        let dir = file.substring(base.length, file.lastIndexOf(separate))
-        if (dir) {
-          // openDAL need the directory path end with '/'
-          dir = `${dir}/`
-        }
-        const basename = file.substring(file.lastIndexOf(separate) + 1)
-        const path = file.substring(base.length + 1)
-        paths.push({
-          // webdav need the directory path end with '/'
-          dir: dir.replace(/\\/g, '/'),
-          path: path.replace(/\\/g, '/'),
-          basename,
-          fsPath: file
-        })
+    const filename = path.basename(file)
+    const fileDir = path.parse(file).dir
+    for (const searchPath of searchPaths) {
+      core.debug(`searchPath: ${searchPath}; file: ${file}`)
+      if (!file.startsWith(searchPath)) {
+        continue
       }
+      let parentDir = fileDir.substring(searchPath.length + 1)
+      if (parentDir) {
+        // like webdav need the directory path end with '/'
+        // is ok to replace all?
+        parentDir = parentDir.replaceAll(/\\/g, '/')
+        if (!parentDir.endsWith('/')) {
+          // openDAL need the directory path end with '/'
+          parentDir = parentDir + '/'
+        }
+      }
+      paths.push({
+        file,
+        filename,
+        parentDir,
+        dest: (parentDir || '') + filename
+      })
     }
   }
   return paths

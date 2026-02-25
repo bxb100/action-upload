@@ -28,10 +28,10 @@ describe('test basic function', () => {
     process.env = OLD_ENV // Restore old environment
   })
 
-  test('OpenDAL memory', async () => {
+  test('openDAL memory', async () => {
     setInput('provider', 'memory')
     setInput('provider_options', '')
-    setInput('include', '__tests__/**/temp')
+    setInput('include', '__tests__/**/temp\n!node_modules/**')
     setInput('flatten', 'true')
 
     const op = await run()

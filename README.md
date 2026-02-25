@@ -30,7 +30,7 @@ A GitHub Action for uploading files to S3/FTP/WebDAV and <a href="https://docs.r
 
 ```yaml
 - name: Upload to memory
-  uses: bxb100/action-upload@main
+  uses: bxb100/action-upload@v0
   with:
     provider: memory
     include: '__tests__/**'
@@ -56,7 +56,7 @@ A GitHub Action for uploading files to S3/FTP/WebDAV and <a href="https://docs.r
 
 ```yaml
 - name: Upload to WebDAV
-  uses: bxb100/action-upload@main
+  uses: bxb100/action-upload@v0
   with:
     provider: webdav
     provider_options: |
@@ -96,8 +96,8 @@ Aws S3 and compatible services (including minio, digitalocean space and so on) s
 </details>
 
 ```yaml
-- name: Upload to S3
-  uses: bxb100/action-upload@main
+- name: Upload to R2
+  uses: bxb100/action-upload@v0
   with:
     provider: s3
     provider_options: |
@@ -110,21 +110,8 @@ Aws S3 and compatible services (including minio, digitalocean space and so on) s
     include: '__tests__/**'
 ```
 
-### Azblob
+### Other
 
-Azure Storage Blob services support.
-<details>
-<summary>Options</summary>
-
-[OpenDAL Azblob](https://docs.rs/opendal/latest/opendal/services/struct.Azblob.html)
-
-- `root`: Set the work dir for backend.
-- `container`: Set the container name for backend.
-- `endpoint`: Set the endpoint for backend.
-- `account_name`: Set the account_name for backend.
-- `account_key`: Set the account_key for backend.
-
-</details>
-
+https://docs.rs/opendal/latest/opendal/services/index.html
 
 [^1]: https://github.com/actions/toolkit/tree/main/packages/glob

@@ -29,7 +29,6 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
   mod
 ));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // node_modules/tunnel/lib/tunnel.js
 var require_tunnel = __commonJS({
@@ -1054,14 +1053,14 @@ var require_util = __commonJS({
         }
         const port = url.port != null ? url.port : url.protocol === "https:" ? 443 : 80;
         let origin = url.origin != null ? url.origin : `${url.protocol || ""}//${url.hostname || ""}:${port}`;
-        let path5 = url.path != null ? url.path : `${url.pathname || ""}${url.search || ""}`;
+        let path6 = url.path != null ? url.path : `${url.pathname || ""}${url.search || ""}`;
         if (origin[origin.length - 1] === "/") {
           origin = origin.slice(0, origin.length - 1);
         }
-        if (path5 && path5[0] !== "/") {
-          path5 = `/${path5}`;
+        if (path6 && path6[0] !== "/") {
+          path6 = `/${path6}`;
         }
-        return new URL(`${origin}${path5}`);
+        return new URL(`${origin}${path6}`);
       }
       if (!isHttpOrHttpsPrefixed(url.origin || url.protocol)) {
         throw new InvalidArgumentError("Invalid URL protocol: the URL must start with `http:` or `https:`.");
@@ -1512,39 +1511,39 @@ var require_diagnostics = __commonJS({
       });
       diagnosticsChannel.channel("undici:client:sendHeaders").subscribe((evt) => {
         const {
-          request: { method, path: path5, origin }
+          request: { method, path: path6, origin }
         } = evt;
-        debuglog("sending request to %s %s/%s", method, origin, path5);
+        debuglog("sending request to %s %s/%s", method, origin, path6);
       });
       diagnosticsChannel.channel("undici:request:headers").subscribe((evt) => {
         const {
-          request: { method, path: path5, origin },
+          request: { method, path: path6, origin },
           response: { statusCode }
         } = evt;
         debuglog(
           "received response to %s %s/%s - HTTP %d",
           method,
           origin,
-          path5,
+          path6,
           statusCode
         );
       });
       diagnosticsChannel.channel("undici:request:trailers").subscribe((evt) => {
         const {
-          request: { method, path: path5, origin }
+          request: { method, path: path6, origin }
         } = evt;
-        debuglog("trailers received from %s %s/%s", method, origin, path5);
+        debuglog("trailers received from %s %s/%s", method, origin, path6);
       });
       diagnosticsChannel.channel("undici:request:error").subscribe((evt) => {
         const {
-          request: { method, path: path5, origin },
+          request: { method, path: path6, origin },
           error: error2
         } = evt;
         debuglog(
           "request to %s %s/%s errored - %s",
           method,
           origin,
-          path5,
+          path6,
           error2.message
         );
       });
@@ -1593,9 +1592,9 @@ var require_diagnostics = __commonJS({
         });
         diagnosticsChannel.channel("undici:client:sendHeaders").subscribe((evt) => {
           const {
-            request: { method, path: path5, origin }
+            request: { method, path: path6, origin }
           } = evt;
-          debuglog("sending request to %s %s/%s", method, origin, path5);
+          debuglog("sending request to %s %s/%s", method, origin, path6);
         });
       }
       diagnosticsChannel.channel("undici:websocket:open").subscribe((evt) => {
@@ -1658,7 +1657,7 @@ var require_request = __commonJS({
     var kHandler = Symbol("handler");
     var Request = class {
       constructor(origin, {
-        path: path5,
+        path: path6,
         method,
         body,
         headers,
@@ -1673,11 +1672,11 @@ var require_request = __commonJS({
         expectContinue,
         servername
       }, handler) {
-        if (typeof path5 !== "string") {
+        if (typeof path6 !== "string") {
           throw new InvalidArgumentError("path must be a string");
-        } else if (path5[0] !== "/" && !(path5.startsWith("http://") || path5.startsWith("https://")) && method !== "CONNECT") {
+        } else if (path6[0] !== "/" && !(path6.startsWith("http://") || path6.startsWith("https://")) && method !== "CONNECT") {
           throw new InvalidArgumentError("path must be an absolute URL or start with a slash");
-        } else if (invalidPathRegex.test(path5)) {
+        } else if (invalidPathRegex.test(path6)) {
           throw new InvalidArgumentError("invalid request path");
         }
         if (typeof method !== "string") {
@@ -1740,7 +1739,7 @@ var require_request = __commonJS({
         this.completed = false;
         this.aborted = false;
         this.upgrade = upgrade || null;
-        this.path = query ? buildURL(path5, query) : path5;
+        this.path = query ? buildURL(path6, query) : path6;
         this.origin = origin;
         this.idempotent = idempotent == null ? method === "HEAD" || method === "GET" : idempotent;
         this.blocking = blocking == null ? false : blocking;
@@ -6253,7 +6252,7 @@ var require_client_h1 = __commonJS({
       return method !== "GET" && method !== "HEAD" && method !== "OPTIONS" && method !== "TRACE" && method !== "CONNECT";
     }
     function writeH1(client, request) {
-      const { method, path: path5, host, upgrade, blocking, reset } = request;
+      const { method, path: path6, host, upgrade, blocking, reset } = request;
       let { body, headers, contentLength } = request;
       const expectsPayload = method === "PUT" || method === "POST" || method === "PATCH" || method === "QUERY" || method === "PROPFIND" || method === "PROPPATCH";
       if (util.isFormDataLike(body)) {
@@ -6319,7 +6318,7 @@ var require_client_h1 = __commonJS({
       if (blocking) {
         socket[kBlocking] = true;
       }
-      let header = `${method} ${path5} HTTP/1.1\r
+      let header = `${method} ${path6} HTTP/1.1\r
 `;
       if (typeof host === "string") {
         header += `host: ${host}\r
@@ -6845,7 +6844,7 @@ var require_client_h2 = __commonJS({
     }
     function writeH2(client, request) {
       const session = client[kHTTP2Session];
-      const { method, path: path5, host, upgrade, expectContinue, signal, headers: reqHeaders } = request;
+      const { method, path: path6, host, upgrade, expectContinue, signal, headers: reqHeaders } = request;
       let { body } = request;
       if (upgrade) {
         util.errorRequest(client, request, new Error("Upgrade not supported for H2"));
@@ -6912,7 +6911,7 @@ var require_client_h2 = __commonJS({
         });
         return true;
       }
-      headers[HTTP2_HEADER_PATH] = path5;
+      headers[HTTP2_HEADER_PATH] = path6;
       headers[HTTP2_HEADER_SCHEME] = "https";
       const expectsPayload = method === "PUT" || method === "POST" || method === "PATCH";
       if (body && typeof body.read === "function") {
@@ -7265,9 +7264,9 @@ var require_redirect_handler = __commonJS({
           return this.handler.onHeaders(statusCode, headers, resume, statusText);
         }
         const { origin, pathname, search } = util.parseURL(new URL(this.location, this.opts.origin && new URL(this.opts.path, this.opts.origin)));
-        const path5 = search ? `${pathname}${search}` : pathname;
+        const path6 = search ? `${pathname}${search}` : pathname;
         this.opts.headers = cleanRequestHeaders(this.opts.headers, statusCode === 303, this.opts.origin !== origin);
-        this.opts.path = path5;
+        this.opts.path = path6;
         this.opts.origin = origin;
         this.opts.maxRedirections = 0;
         this.opts.query = null;
@@ -8501,10 +8500,10 @@ var require_proxy_agent = __commonJS({
         };
         const {
           origin,
-          path: path5 = "/",
+          path: path6 = "/",
           headers = {}
         } = opts;
-        opts.path = origin + path5;
+        opts.path = origin + path6;
         if (!("host" in headers) && !("Host" in headers)) {
           const { host } = new URL2(origin);
           headers.host = host;
@@ -10425,20 +10424,20 @@ var require_mock_utils = __commonJS({
       }
       return true;
     }
-    function safeUrl(path5) {
-      if (typeof path5 !== "string") {
-        return path5;
+    function safeUrl(path6) {
+      if (typeof path6 !== "string") {
+        return path6;
       }
-      const pathSegments = path5.split("?");
+      const pathSegments = path6.split("?");
       if (pathSegments.length !== 2) {
-        return path5;
+        return path6;
       }
       const qp = new URLSearchParams(pathSegments.pop());
       qp.sort();
       return [...pathSegments, qp.toString()].join("?");
     }
-    function matchKey(mockDispatch2, { path: path5, method, body, headers }) {
-      const pathMatch = matchValue(mockDispatch2.path, path5);
+    function matchKey(mockDispatch2, { path: path6, method, body, headers }) {
+      const pathMatch = matchValue(mockDispatch2.path, path6);
       const methodMatch = matchValue(mockDispatch2.method, method);
       const bodyMatch = typeof mockDispatch2.body !== "undefined" ? matchValue(mockDispatch2.body, body) : true;
       const headersMatch = matchHeaders(mockDispatch2, headers);
@@ -10460,7 +10459,7 @@ var require_mock_utils = __commonJS({
     function getMockDispatch(mockDispatches, key) {
       const basePath = key.query ? buildURL(key.path, key.query) : key.path;
       const resolvedPath = typeof basePath === "string" ? safeUrl(basePath) : basePath;
-      let matchedMockDispatches = mockDispatches.filter(({ consumed }) => !consumed).filter(({ path: path5 }) => matchValue(safeUrl(path5), resolvedPath));
+      let matchedMockDispatches = mockDispatches.filter(({ consumed }) => !consumed).filter(({ path: path6 }) => matchValue(safeUrl(path6), resolvedPath));
       if (matchedMockDispatches.length === 0) {
         throw new MockNotMatchedError(`Mock dispatch not matched for path '${resolvedPath}'`);
       }
@@ -10498,9 +10497,9 @@ var require_mock_utils = __commonJS({
       }
     }
     function buildKey(opts) {
-      const { path: path5, method, body, headers, query } = opts;
+      const { path: path6, method, body, headers, query } = opts;
       return {
-        path: path5,
+        path: path6,
         method,
         body,
         headers,
@@ -10963,10 +10962,10 @@ var require_pending_interceptors_formatter = __commonJS({
       }
       format(pendingInterceptors) {
         const withPrettyHeaders = pendingInterceptors.map(
-          ({ method, path: path5, data: { statusCode }, persist, times, timesInvoked, origin }) => ({
+          ({ method, path: path6, data: { statusCode }, persist, times, timesInvoked, origin }) => ({
             Method: method,
             Origin: origin,
-            Path: path5,
+            Path: path6,
             "Status code": statusCode,
             Persistent: persist ? PERSISTENT : NOT_PERSISTENT,
             Invocations: timesInvoked,
@@ -15847,9 +15846,9 @@ var require_util6 = __commonJS({
         }
       }
     }
-    function validateCookiePath(path5) {
-      for (let i = 0; i < path5.length; ++i) {
-        const code = path5.charCodeAt(i);
+    function validateCookiePath(path6) {
+      for (let i = 0; i < path6.length; ++i) {
+        const code = path6.charCodeAt(i);
         if (code < 32 || // exclude CTLs (0-31)
         code === 127 || // DEL
         code === 59) {
@@ -18443,11 +18442,11 @@ var require_undici = __commonJS({
           if (typeof opts.path !== "string") {
             throw new InvalidArgumentError("invalid opts.path");
           }
-          let path5 = opts.path;
+          let path6 = opts.path;
           if (!opts.path.startsWith("/")) {
-            path5 = `/${path5}`;
+            path6 = `/${path6}`;
           }
-          url = new URL(util.parseOrigin(url).origin + path5);
+          url = new URL(util.parseOrigin(url).origin + path6);
         } else {
           if (!opts) {
             opts = typeof url === "object" ? url : {};
@@ -19313,7 +19312,7 @@ var require_minimatch = __commonJS({
   "node_modules/minimatch/minimatch.js"(exports2, module2) {
     module2.exports = minimatch2;
     minimatch2.Minimatch = Minimatch2;
-    var path5 = (function() {
+    var path6 = (function() {
       try {
         return require("path");
       } catch (e) {
@@ -19321,7 +19320,7 @@ var require_minimatch = __commonJS({
     })() || {
       sep: "/"
     };
-    minimatch2.sep = path5.sep;
+    minimatch2.sep = path6.sep;
     var GLOBSTAR = minimatch2.GLOBSTAR = Minimatch2.GLOBSTAR = {};
     var expand = require_brace_expansion();
     var plTypes = {
@@ -19410,8 +19409,8 @@ var require_minimatch = __commonJS({
       assertValidPattern(pattern);
       if (!options) options = {};
       pattern = pattern.trim();
-      if (!options.allowWindowsEscape && path5.sep !== "/") {
-        pattern = pattern.split(path5.sep).join("/");
+      if (!options.allowWindowsEscape && path6.sep !== "/") {
+        pattern = pattern.split(path6.sep).join("/");
       }
       this.options = options;
       this.set = [];
@@ -19781,8 +19780,8 @@ var require_minimatch = __commonJS({
       if (this.empty) return f === "";
       if (f === "/" && partial) return true;
       var options = this.options;
-      if (path5.sep !== "/") {
-        f = f.split(path5.sep).join("/");
+      if (path6.sep !== "/") {
+        f = f.split(path6.sep).join("/");
       }
       f = f.split(slashSplit);
       this.debug(this.pattern, "split", f);
@@ -19881,13 +19880,6 @@ var require_minimatch = __commonJS({
     }
   }
 });
-
-// src/main.ts
-var main_exports = {};
-__export(main_exports, {
-  run: () => run
-});
-module.exports = __toCommonJS(main_exports);
 
 // node_modules/@actions/core/lib/command.js
 var os = __toESM(require("os"), 1);
@@ -20954,8 +20946,8 @@ var Pattern = class _Pattern {
 
 // node_modules/@actions/glob/lib/internal-search-state.js
 var SearchState = class {
-  constructor(path5, level) {
-    this.path = path5;
+  constructor(path6, level) {
+    this.path = path6;
     this.level = level;
   }
 };
@@ -21232,7 +21224,7 @@ function create(patterns, options) {
 }
 
 // src/glob-helper.ts
-var os5 = __toESM(require("os"), 1);
+var import_node_path = __toESM(require("node:path"), 1);
 var patterSplit = (patterns) => {
   const includes = [];
   const excludes = [];
@@ -21254,33 +21246,31 @@ var includeFiles = async (patterns) => {
     omitBrokenSymbolicLinks: true
   });
   const searchPaths = globber.getSearchPaths();
-  debug(`search paths: ${searchPaths}`);
   const paths = [];
-  let separate = "/";
-  if (os5.platform() === "win32") {
-    separate = "\\";
-  }
   for await (const file of globber.globGenerator()) {
     if (file.endsWith(".DS_Store")) {
       continue;
     }
-    for (const base of searchPaths) {
-      debug(`base: ${base}; file: ${file}`);
-      if (file.startsWith(base)) {
-        let dir = file.substring(base.length, file.lastIndexOf(separate));
-        if (dir) {
-          dir = `${dir}/`;
-        }
-        const basename3 = file.substring(file.lastIndexOf(separate) + 1);
-        const path5 = file.substring(base.length + 1);
-        paths.push({
-          // webdav need the directory path end with '/'
-          dir: dir.replace(/\\/g, "/"),
-          path: path5.replace(/\\/g, "/"),
-          basename: basename3,
-          fsPath: file
-        });
+    const filename = import_node_path.default.basename(file);
+    const fileDir = import_node_path.default.parse(file).dir;
+    for (const searchPath of searchPaths) {
+      debug(`searchPath: ${searchPath}; file: ${file}`);
+      if (!file.startsWith(searchPath)) {
+        continue;
       }
+      let parentDir = fileDir.substring(searchPath.length + 1);
+      if (parentDir) {
+        parentDir = parentDir.replaceAll(/\\/g, "/");
+        if (!parentDir.endsWith("/")) {
+          parentDir = parentDir + "/";
+        }
+      }
+      paths.push({
+        file,
+        filename,
+        parentDir,
+        dest: (parentDir || "") + filename
+      });
     }
   }
   return paths;
@@ -21297,22 +21287,27 @@ async function run() {
       debug(`flatten: ${config.flatten}`);
     }
     startGroup(`Upload files to ${config.provider} start`);
-    const op = new opendal_exports.Operator(config.provider, config.options);
+    let op = new opendal_exports.Operator(config.provider, config.options);
+    const retryLayer = new opendal_exports.RetryLayer();
+    retryLayer.jitter = true;
+    retryLayer.maxTimes = 4;
+    op = op.layer(retryLayer.build());
+    await op.check();
     const pathSpec = await includeFiles(config.patterns);
     debug(`path spec: ${JSON.stringify(pathSpec)}`);
     for (const spec of pathSpec) {
-      debug(`upload file: ${spec.fsPath}`);
+      debug(`upload file: ${spec.file}`);
       if (config.flatten) {
-        info(`direct upload file: ${spec.basename}`);
-        await op.write(spec.basename, fs3.readFileSync(spec.fsPath));
+        info(`direct upload file: ${spec.filename}`);
+        await op.write(spec.filename, fs3.readFileSync(spec.file));
         continue;
       }
-      info(`upload file: ${spec.path} to ${spec.dir}`);
-      if (spec.dir) {
-        debug(`ensure the upload directory exists: ${spec.dir}`);
-        await op.createDir(spec.dir);
+      info(`upload file: ${spec.filename} to ${spec.dest}`);
+      if (op.capability().createDir && spec.parentDir) {
+        debug(`ensure the upload directory exists: ${spec.parentDir}`);
+        await op.createDir(spec.parentDir);
       }
-      await op.write(spec.path, fs3.readFileSync(spec.fsPath));
+      await op.write(spec.dest, fs3.readFileSync(spec.file));
     }
     endGroup();
     return op;
@@ -21321,11 +21316,9 @@ async function run() {
     setFailed("Upload files failed");
   }
 }
-if (process.env.NODE_ENV !== "test") run();
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
-  run
-});
+
+// src/index.ts
+run();
 /*! Bundled license information:
 
 undici/lib/web/fetch/body.js:

@@ -1,7 +1,7 @@
 import * as core from '@actions/core'
 import * as fs from 'fs'
 import { ConfigHelper } from './config-helper'
-import { Operator } from 'opendal'
+import { Operator, RetryLayer } from 'opendal'
 import { includeFiles } from './glob-helper'
 
 export async function run(): Promise<Operator | undefined> {
@@ -18,26 +18,32 @@ export async function run(): Promise<Operator | undefined> {
 
     core.startGroup(`Upload files to ${config.provider} start`)
 
-    const op = new Operator(config.provider, config.options)
+    let op = new Operator(config.provider, config.options)
+    const retryLayer = new RetryLayer()
+    retryLayer.jitter = true
+    retryLayer.maxTimes = 4
+    op = op.layer(retryLayer.build())
+    await op.check()
+
     const pathSpec = await includeFiles(config.patterns)
     core.debug(`path spec: ${JSON.stringify(pathSpec)}`)
     for (const spec of pathSpec) {
-      core.debug(`upload file: ${spec.fsPath}`)
+      core.debug(`upload file: ${spec.file}`)
 
       if (config.flatten) {
-        core.info(`direct upload file: ${spec.basename}`)
-        await op.write(spec.basename, fs.readFileSync(spec.fsPath))
+        core.info(`direct upload file: ${spec.filename}`)
+        await op.write(spec.filename, fs.readFileSync(spec.file))
         continue
       }
 
-      core.info(`upload file: ${spec.path} to ${spec.dir}`)
+      core.info(`upload file: ${spec.filename} to ${spec.dest}`)
       // ensure the upload directory exists, relative path from search path
-      if (spec.dir) {
-        core.debug(`ensure the upload directory exists: ${spec.dir}`)
-        await op.createDir(spec.dir)
+      if (op.capability().createDir && spec.parentDir) {
+        core.debug(`ensure the upload directory exists: ${spec.parentDir}`)
+        await op.createDir(spec.parentDir)
       }
       // upload file
-      await op.write(spec.path, fs.readFileSync(spec.fsPath))
+      await op.write(spec.dest, fs.readFileSync(spec.file))
     }
     core.endGroup()
     return op
@@ -46,6 +52,3 @@ export async function run(): Promise<Operator | undefined> {
     core.setFailed('Upload files failed')
   }
 }
-
-// fix test child process not passing env caused print error message
-if (process.env.NODE_ENV !== 'test') run()

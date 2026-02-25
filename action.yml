@@ -21,7 +21,7 @@ inputs:
 
 runs:
   using: 'node24'
-  main: 'dist/main.cjs'
+  main: 'dist/index.cjs'
 
 branding:
   icon: 'upload-cloud'

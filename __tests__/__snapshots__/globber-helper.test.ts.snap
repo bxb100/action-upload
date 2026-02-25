@@ -27,6 +27,7 @@ exports[`github issue 110 - workspace 1`] = `
   "script/release",
   "src/config-helper.ts",
   "src/glob-helper.ts",
+  "src/index.ts",
   "src/main.ts",
   "tsconfig.json",
 ]
