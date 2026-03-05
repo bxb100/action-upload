@@ -29,5 +29,6 @@ exports[`github issue 110 - workspace 1`] = `
   "src/index.ts",
   "src/main.ts",
   "tsconfig.json",
+  "tsdown.config.ts",
 ]
 `;
