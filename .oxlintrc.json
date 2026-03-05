@@ -1,0 +1,11 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "ignorePatterns": ["node_modules", "dist"],
+  "jsPlugins": [{ "name": "github", "specifier": "eslint-plugin-github" }],
+  "rules": {
+    "github/array-foreach": "error",
+    "github/async-preventdefault": "warn",
+    "github/no-then": "error",
+    "github/no-blur": "error"
+  }
+}

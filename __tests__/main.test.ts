@@ -6,6 +6,7 @@ import {
   jest,
   test
 } from '@jest/globals'
+
 import { run } from '../src/main'
 
 function getVariableKey(name: string): string {

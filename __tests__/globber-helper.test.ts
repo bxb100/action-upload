@@ -1,7 +1,9 @@
-import { expect, test } from '@jest/globals'
-import { includeFiles } from '../src/glob-helper'
 import assert from 'node:assert'
 import * as path from 'path'
+
+import { expect, test } from '@jest/globals'
+
+import { includeFiles } from '../src/glob-helper'
 
 const __dirname = import.meta.dirname
 

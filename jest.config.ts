@@ -1,5 +1,6 @@
 /** @jest-config-loader esbuild-register */
 import type { Config } from 'jest'
+
 import { createDefaultEsmPreset } from 'ts-jest'
 
 const presetConfig = createDefaultEsmPreset({
