@@ -19881,6 +19881,9 @@ var require_minimatch = __commonJS({
   }
 });
 
+// src/main.ts
+var fs3 = __toESM(require("fs"), 1);
+
 // node_modules/@actions/core/lib/command.js
 var os = __toESM(require("os"), 1);
 
@@ -20367,58 +20370,6 @@ function endGroup() {
   issue("endgroup");
 }
 
-// src/main.ts
-var fs3 = __toESM(require("fs"), 1);
-
-// src/config-helper.ts
-function trim_quote(pattern, quote) {
-  if (pattern.startsWith(quote) && pattern.endsWith(quote)) {
-    return pattern.slice(1, -1);
-  }
-  return pattern;
-}
-var ConfigHelper = class {
-  _provider;
-  _options;
-  _patterns;
-  _flatten;
-  constructor() {
-    this._provider = getInput("provider", {
-      required: true,
-      trimWhitespace: true
-    }).toLowerCase();
-    this._options = {};
-    const provider_options = getMultilineInput("provider_options", {
-      required: false
-    }).filter((option) => option !== "").map((option) => trim_quote(option, '"')).map((option) => trim_quote(option, "'"));
-    for (const option of provider_options) {
-      const eqIndex = option.indexOf("=");
-      const key = option.slice(0, eqIndex);
-      const value = option.slice(eqIndex + 1);
-      this._options[key.trim()] = value.trim();
-    }
-    this._patterns = getMultilineInput("include", {
-      required: true,
-      trimWhitespace: true
-    }).map((option) => trim_quote(option, '"')).map((option) => trim_quote(option, "'"));
-    this._flatten = getBooleanInput("flatten", {
-      required: false
-    });
-  }
-  get provider() {
-    return this._provider;
-  }
-  get options() {
-    return this._options;
-  }
-  get patterns() {
-    return this._patterns;
-  }
-  get flatten() {
-    return this._flatten;
-  }
-};
-
 // node_modules/opendal/index.mjs
 var opendal_exports = {};
 __export(opendal_exports, {
@@ -20525,6 +20476,58 @@ var layers = {
   ConcurrentLimitLayer
 };
 var opendal_default = generated;
+
+// src/config-helper.ts
+function trim_quote(pattern, quote) {
+  if (pattern.startsWith(quote) && pattern.endsWith(quote)) {
+    return pattern.slice(1, -1);
+  }
+  return pattern;
+}
+var ConfigHelper = class {
+  _provider;
+  _options;
+  _patterns;
+  _flatten;
+  constructor() {
+    this._provider = getInput("provider", {
+      required: true,
+      trimWhitespace: true
+    }).toLowerCase();
+    this._options = {};
+    const provider_options = getMultilineInput("provider_options", {
+      required: false
+    }).filter((option) => option !== "").map((option) => trim_quote(option, '"')).map((option) => trim_quote(option, "'"));
+    for (const option of provider_options) {
+      const eqIndex = option.indexOf("=");
+      const key = option.slice(0, eqIndex);
+      const value = option.slice(eqIndex + 1);
+      this._options[key.trim()] = value.trim();
+    }
+    this._patterns = getMultilineInput("include", {
+      required: true,
+      trimWhitespace: true
+    }).map((option) => trim_quote(option, '"')).map((option) => trim_quote(option, "'"));
+    this._flatten = getBooleanInput("flatten", {
+      required: false
+    });
+  }
+  get provider() {
+    return this._provider;
+  }
+  get options() {
+    return this._options;
+  }
+  get patterns() {
+    return this._patterns;
+  }
+  get flatten() {
+    return this._flatten;
+  }
+};
+
+// src/glob-helper.ts
+var import_node_path = __toESM(require("node:path"), 1);
 
 // node_modules/@actions/glob/lib/internal-globber.js
 var fs2 = __toESM(require("fs"), 1);
@@ -21224,7 +21227,6 @@ function create(patterns, options) {
 }
 
 // src/glob-helper.ts
-var import_node_path = __toESM(require("node:path"), 1);
 var patterSplit = (patterns) => {
   const includes = [];
   const excludes = [];

@@ -1,7 +1,9 @@
-import * as core from '@actions/core'
 import * as fs from 'fs'
-import { ConfigHelper } from './config-helper'
+
+import * as core from '@actions/core'
 import { Operator, RetryLayer } from 'opendal'
+
+import { ConfigHelper } from './config-helper'
 import { includeFiles } from './glob-helper'
 
 export async function run(): Promise<Operator | undefined> {

@@ -14,13 +14,14 @@ A GitHub Action for uploading files to S3/FTP/WebDAV and <a href="https://docs.r
 ## All Parameters
 
 | Input              | Description                                                                  | Default |
-|:-------------------|:-----------------------------------------------------------------------------|:--------|
+| :----------------- | :--------------------------------------------------------------------------- | :------ |
 | `provider`         | The uploader name                                                            | -       |
 | `provider_options` | Newline-delimited list of the uploader options<br/> using `key=value` format | -       |
 | `include`          | Newline-delimited list of the glob pattern [^1]                              | -       |
 | `flatten`          | flatten the upload path                                                      | false   |
 
-> 🐾 You can learn more about multi-line YAML syntax [here](https://yaml-multiline.info/)
+> 🐾 You can learn more about multi-line YAML syntax
+> [here](https://yaml-multiline.info/)
 
 ## Providers
 
@@ -39,13 +40,14 @@ A GitHub Action for uploading files to S3/FTP/WebDAV and <a href="https://docs.r
 ### WebDAV
 
 [![test-webdav](https://github.com/bxb100/action-upload/actions/workflows/test-webdav.yml/badge.svg?branch=main)](https://github.com/bxb100/action-upload/actions/workflows/test-webdav.yml)
+
 <details>
 <summary>Options</summary>
 
 [OpenDAL WebDAV](https://docs.rs/opendal/latest/opendal/services/struct.Webdav.html)
 
 | Name     | Description         | Default | Other                               |
-|----------|---------------------|---------|-------------------------------------|
+| -------- | ------------------- | ------- | ----------------------------------- |
 | endpoint | WebDAV endpoint     | -       | -                                   |
 | username | WebDAV username     | -       | -                                   |
 | password | WebDAV password     | -       | -                                   |
@@ -71,7 +73,8 @@ A GitHub Action for uploading files to S3/FTP/WebDAV and <a href="https://docs.r
 
 [![test-s3](https://github.com/bxb100/action-upload/actions/workflows/test-s3.yml/badge.svg?branch=main)](https://github.com/bxb100/action-upload/actions/workflows/test-s3.yml)
 
-Aws S3 and compatible services (including minio, digitalocean space and so on) support.
+Aws S3 and compatible services (including minio, digitalocean space and so on)
+support.
 
 <details>
 <summary>Options</summary>
@@ -86,10 +89,14 @@ Aws S3 and compatible services (including minio, digitalocean space and so on) s
 - `secret_access_key`: Set the secret_access_key for backend.
 - `security_token`: Set the security_token for backend.
 - `server_side_encryption`: Set the server_side_encryption for backend.
-- `server_side_encryption_aws_kms_key_id`: Set the server_side_encryption_aws_kms_key_id for backend.
-- `server_side_encryption_customer_algorithm`: Set the server_side_encryption_customer_algorithm for backend.
-- `server_side_encryption_customer_key`: Set the server_side_encryption_customer_key for backend.
-- `server_side_encryption_customer_key_md5`: Set the server_side_encryption_customer_key_md5 for backend.
+- `server_side_encryption_aws_kms_key_id`: Set the
+  server_side_encryption_aws_kms_key_id for backend.
+- `server_side_encryption_customer_algorithm`: Set the
+  server_side_encryption_customer_algorithm for backend.
+- `server_side_encryption_customer_key`: Set the
+  server_side_encryption_customer_key for backend.
+- `server_side_encryption_customer_key_md5`: Set the
+  server_side_encryption_customer_key_md5 for backend.
 - `disable_config_load`: Disable aws config load from env
 - `enable_virtual_host_style`: Enable virtual host style.
 

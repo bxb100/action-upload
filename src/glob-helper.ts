@@ -1,6 +1,7 @@
+import path from 'node:path'
+
 import * as core from '@actions/core'
 import * as glob from '@actions/glob'
-import path from 'node:path'
 
 const patterSplit = (
   patterns: string[]

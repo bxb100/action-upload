@@ -1,4 +1,5 @@
 import { expect, test } from '@jest/globals'
+
 import { ConfigHelper } from '../src/config-helper'
 
 test('runs', () => {
