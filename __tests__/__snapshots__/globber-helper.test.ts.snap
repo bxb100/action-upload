@@ -12,6 +12,7 @@ exports[`github issue 110 - __test__ dir 1`] = `
 
 exports[`github issue 110 - workspace 1`] = `
 [
+  ".env.example",
   ".gitattributes",
   ".gitignore",
   ".oxfmtrc.json",
@@ -20,6 +21,7 @@ exports[`github issue 110 - workspace 1`] = `
   "README.md",
   "action.yml",
   "jest.config.ts",
+  "mise.toml",
   "package-lock.json",
   "package.json",
   "script/download_binary.sh",
