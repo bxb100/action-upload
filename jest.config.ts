@@ -1,4 +1,4 @@
-/** @jest-config-loader esbuild-register */
+/** @jest-config-loader ts-node */
 import type { Config } from 'jest'
 
 import { createDefaultEsmPreset } from 'ts-jest'
