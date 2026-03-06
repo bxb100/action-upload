@@ -1,2 +1,5 @@
 [env]
 _.file = '.env'
+
+[tasks]
+release = { run = './script/release' }
