@@ -6,7 +6,7 @@ export default defineConfig({
   outDir: 'dist',
   format: 'esm',
   platform: 'node',
-  target: 'node24',
+  target: 'esnext',
   clean: false,
   shims: true,
   banner: {
