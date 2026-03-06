@@ -3,7 +3,8 @@
   "version": "0.1.1",
   "private": true,
   "description": "Uniform Uploader Github Action",
-  "main": "dist/index.cjs",
+  "type": "module",
+  "main": "dist/index.mjs",
   "scripts": {
     "build": "tsdown",
     "format:write": "oxfmt --write '**/*.ts'",

@@ -4,11 +4,14 @@ export default defineConfig({
   entry: 'src/index.ts',
   unbundle: false,
   outDir: 'dist',
-  format: 'cjs',
+  format: 'esm',
   platform: 'node',
   target: 'node24',
   clean: false,
   shims: true,
+  banner: {
+    js: 'var require;'
+  },
   deps: {
     neverBundle: [/^@opendal\//],
     alwaysBundle: [/.*/]
