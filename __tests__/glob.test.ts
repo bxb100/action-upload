@@ -3,7 +3,7 @@ import * as path from 'path'
 
 import { expect, test } from '@jest/globals'
 
-import { includeFiles } from '../src/glob-helper'
+import { includeFiles } from '../src/glob'
 
 const __dirname = import.meta.dirname
 

@@ -1,15 +1,19 @@
 import { expect, test } from '@jest/globals'
 
-import { ConfigHelper } from '../src/config-helper'
+import { Config } from '../src/config'
 
 test('runs', () => {
   process.env['INPUT_PROVIDER'] = 'memory'
   process.env['INPUT_PROVIDER_OPTIONS'] = `
-  A=1
+  "A=1 "
+
   B = 2
+
   C=3
-  D= 1=2=3
+  ' D= 1=2=3'
   E =E=2
+  =
+  ==invalid==
   `
   process.env['INPUT_INCLUDE'] =
     "\
@@ -18,7 +22,7 @@ test('runs', () => {
   "
   process.env['INPUT_FLATTEN'] = 'true'
 
-  const config = new ConfigHelper()
+  const config = new Config()
   expect(config.provider).toBe('memory')
   expect(config.options).toEqual({
     A: '1',

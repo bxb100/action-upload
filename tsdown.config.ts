@@ -9,6 +9,7 @@ export default defineConfig({
   target: 'esnext',
   clean: false,
   shims: true,
+  minify: false,
   banner: {
     js: 'var require;'
   },
