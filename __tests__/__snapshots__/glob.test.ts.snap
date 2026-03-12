@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`github issue 110 - __test__ dir 1`] = `
+exports[`glob github issue 110 - __test__ dir 1`] = `
 [
   "__snapshots__/glob.test.ts.snap",
   "config.test.ts",
@@ -10,7 +10,7 @@ exports[`github issue 110 - __test__ dir 1`] = `
 ]
 `;
 
-exports[`github issue 110 - workspace 1`] = `
+exports[`glob github issue 110 - workspace 1`] = `
 [
   ".env.example",
   ".gitattributes",

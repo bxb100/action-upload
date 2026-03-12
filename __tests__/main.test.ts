@@ -1,5 +1,6 @@
 import {
   afterAll,
+  afterEach,
   beforeEach,
   describe,
   expect,
@@ -7,7 +8,9 @@ import {
   test
 } from '@jest/globals'
 
-import { run } from '../src/main'
+import * as core from '../__fixtures__/core'
+jest.unstable_mockModule('@actions/core', () => core)
+const { run } = await import('../src/main')
 
 function getVariableKey(name: string): string {
   return name.replace(/\./g, '_').replace(/ /g, '_').toUpperCase()
@@ -21,8 +24,11 @@ describe('test basic function', () => {
   const OLD_ENV = process.env
 
   beforeEach(() => {
-    jest.resetModules() // Most important - it clears the cache
     process.env = { ...OLD_ENV } // Make a copy
+  })
+
+  afterEach(() => {
+    jest.resetAllMocks()
   })
 
   afterAll(() => {
@@ -40,5 +46,6 @@ describe('test basic function', () => {
     expect(content?.toString().trim()).toEqual(
       'this test file for action-upload'
     )
+    expect(core.setFailed).not.toHaveBeenCalled()
   })
 })
