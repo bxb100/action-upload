@@ -18,7 +18,7 @@ function splitPatterns(patterns: string[]): {
   const includes: string[] = []
   const excludes: string[] = []
   for (const p of patterns) {
-    (p.startsWith('!') ? excludes : includes).push(p)
+    ;(p.startsWith('!') ? excludes : includes).push(p)
   }
   return { includes, excludes }
 }

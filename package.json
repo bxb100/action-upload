@@ -1,6 +1,6 @@
 {
   "name": "upload-action",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "description": "Uniform Uploader Github Action",
   "type": "module",
@@ -14,7 +14,7 @@
     "download": "./script/download_binary.sh",
     "test": "NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 npx jest",
     "package": "rimraf dist && npm run build && npm run download",
-    "all": "npm run build && npm run format:write && npm run lint && npm run package && npm test"
+    "all": "npm test && npm run format:write && npm run lint && npm run package"
   },
   "repository": {
     "type": "git",
@@ -33,13 +33,13 @@
     "opendal": "^0.49.2"
   },
   "devDependencies": {
-    "@jest/globals": "^30.2.0",
-    "@types/node": "^25.3.0",
+    "@jest/globals": "^30.3.0",
+    "@types/node": "^25.5.0",
     "eslint-plugin-github": "^6.0.0",
-    "jest": "^30.2.0",
+    "jest": "^30.3.0",
     "js-yaml": "^4.1.0",
     "oxfmt": "^0.36.0",
-    "oxlint": "^1.51.0",
+    "oxlint": "^1.55.0",
     "rimraf": "^6.1.3",
     "ts-jest": "^29.1.1",
     "ts-node": "^10.9.2",
