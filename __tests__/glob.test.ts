@@ -4,6 +4,8 @@ import * as path from 'path'
 import { afterEach, describe, expect, it, jest } from '@jest/globals'
 
 import * as core from '../__fixtures__/core'
+import { readFile } from 'node:fs/promises'
+import { join } from 'node:path'
 jest.unstable_mockModule('@actions/core', () => core)
 const { includeFiles } = await import('../src/glob')
 
@@ -50,17 +52,22 @@ describe('glob', () => {
   it('github issue 110 - workspace', async () => {
     const patterns = [
       './**',
+      '!__fixtures__',
+      '!__tests__',
       '!dist',
-      '!node_modules/**',
-      '!__fixtures__/**',
-      '!__tests__/**',
       '!.git',
       '!.idea',
-      '!.github',
-      '!lib',
-      '!coverage/**',
-      '!.env'
+      '!.github'
     ]
+    // respect .gitignore
+    const gitignore = await readFile(join(__dirname, '../.gitignore'), 'utf-8')
+    const gitignorePatterns = gitignore
+      .split('\n')
+      .map((line) => line.trim())
+      .filter((line) => line && !line.startsWith('#') && !line.startsWith('!'))
+      .map((line) => `!${line}`)
+    patterns.push(...gitignorePatterns)
+
     const file = await includeFiles(patterns)
 
     expect(file.map((s) => s.dest)).toMatchSnapshot()
