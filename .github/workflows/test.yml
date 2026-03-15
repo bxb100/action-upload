@@ -8,6 +8,8 @@ on: # rebuild any PRs and main branch changes
     paths-ignore:
       - '**.md'
 
+permissions: {}
+
 jobs:
   build: # make sure build/ci work properly
     runs-on: ubuntu-latest

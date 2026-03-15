@@ -12,14 +12,21 @@ exports[`glob github issue 110 - __test__ dir 1`] = `
 
 exports[`glob github issue 110 - workspace 1`] = `
 [
+  ".checkov.yml",
   ".env.example",
   ".gitattributes",
   ".gitignore",
+  ".licensed.yml",
+  ".markdown-lint.yml",
+  ".node-version",
   ".oxfmtrc.json",
   ".oxlintrc.json",
+  ".pre-commit-config.yaml",
+  ".yaml-lint.yml",
   "LICENSE",
   "README.md",
   "action.yml",
+  "actionlint.yml",
   "jest.config.ts",
   "mise.toml",
   "package-lock.json",
@@ -30,6 +37,7 @@ exports[`glob github issue 110 - workspace 1`] = `
   "src/glob.ts",
   "src/index.ts",
   "src/main.ts",
+  "trivy.yaml",
   "tsconfig.json",
   "tsdown.config.ts",
 ]

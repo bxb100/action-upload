@@ -21,6 +21,7 @@ describe('config', () => {
   E =E=2
   =
   ==invalid==
+  ## test=1
   `
     process.env['INPUT_INCLUDE'] =
       "\

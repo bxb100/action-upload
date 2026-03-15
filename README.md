@@ -5,7 +5,10 @@
 File Uploader 
 </h1>
 <p align="center">
-A GitHub Action for uploading files to S3/FTP/WebDAV and <a href="https://docs.rs/opendal/latest/opendal/services/index.html">more</a>, powered by <a href="https://github.com/apache/incubator-opendal">Apache OpenDAL</a>
+A GitHub Action for uploading files to S3/FTP/WebDAV and 
+<a href="https://docs.rs/opendal/latest/opendal/services/index.html">more</a>
+,powered by 
+<a href="https://github.com/apache/incubator-opendal">Apache OpenDAL</a>
 </p>
 
 <p align="right">
@@ -20,8 +23,8 @@ A GitHub Action for uploading files to S3/FTP/WebDAV and <a href="https://docs.r
 | `include`          | Newline-delimited list of the glob pattern [^1]                              | -       |
 | `flatten`          | flatten the upload path                                                      | false   |
 
-> 🐾 You can learn more about multi-line YAML syntax
-> [here](https://yaml-multiline.info/)
+> 🐾 You can learn more about multi-line 
+> [YAML syntax](https://yaml-multiline.info/)
 
 ## Providers
 
@@ -119,6 +122,6 @@ support.
 
 ### Other
 
-https://docs.rs/opendal/latest/opendal/services/index.html
+<https://docs.rs/opendal/latest/opendal/services/index.html>
 
-[^1]: https://github.com/actions/toolkit/tree/main/packages/glob
+[^1]: <https://github.com/actions/toolkit/tree/main/packages/glob>

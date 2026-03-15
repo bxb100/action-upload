@@ -100,3 +100,4 @@ __tests__/runner/*
 package
 vendor-tgz
 .vendor-tmp
+!.github/super-linter.env

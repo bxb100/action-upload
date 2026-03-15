@@ -1,0 +1,4 @@
+cache:
+  # if not set, conflict with prek
+  # Same as '--cache-dir'
+  dir: "/tmp/.cache"

@@ -13,10 +13,9 @@ function parseKeyValueLines(lines: string[]): Record<string, string> {
   return Object.fromEntries(
     lines
       .map((line) => line.trim())
-      .filter(
-        (line) =>
-          !line.startsWith('=') && !line.endsWith('=') && line.includes('=')
-      )
+      .filter((line) => line && !line.startsWith('#'))
+      .filter((line) => !line.startsWith('=') && !line.endsWith('='))
+      .filter((line) => line.includes('='))
       .map((line) => stripQuotes(line))
       .map((line) => {
         const eqIndex = line.indexOf('=')

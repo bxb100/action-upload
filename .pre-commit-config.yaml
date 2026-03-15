@@ -1,0 +1,10 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+  - repo: local
+    hooks:
+      - id: super-linter
+        name: Super Linter
+        language: docker_image
+        pass_filenames: false
+        entry: --platform linux/amd64 -e DEFAULT_WORKSPACE="/src" -e RUN_LOCAL=true --env-file ".github/super-linter.env" ghcr.io/super-linter/super-linter:slim-latest
