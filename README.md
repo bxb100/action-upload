@@ -42,7 +42,7 @@ A GitHub Action for uploading files to S3/FTP/WebDAV and
 
 ### WebDAV
 
-[![test-webdav](https://github.com/bxb100/action-upload/actions/workflows/test-webdav.yml/badge.svg?branch=main)](https://github.com/bxb100/action-upload/actions/workflows/test-webdav.yml)
+[![webdav test in multiplatform](https://github.com/bxb100/action-upload/actions/workflows/test-multiplatform.yml/badge.svg)](https://github.com/bxb100/action-upload/actions/workflows/test-multiplatform.yml)
 
 <details>
 <summary>Options</summary>
