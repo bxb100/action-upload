@@ -1,4 +1,4 @@
-name: 'test-s3'
+name: S3 Test
 on:
   push:
     branches:

@@ -1,4 +1,4 @@
-name: 'test-memory'
+name: Memory Test
 on:
   pull_request:
   push:

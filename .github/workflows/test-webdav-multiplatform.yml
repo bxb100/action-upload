@@ -1,4 +1,4 @@
-name: 'webdav test in multiplatform'
+name: WebDAV Multi-OS
 on:
   workflow_dispatch:
   push:

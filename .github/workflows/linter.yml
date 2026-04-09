@@ -3,7 +3,7 @@
 #
 # For more information, see the super-linter repository:
 #     https://github.com/super-linter/super-linter
-name: Lint Codebase
+name: Code Lint
 
 on:
   pull_request:

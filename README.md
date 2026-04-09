@@ -2,16 +2,23 @@
   :outbox_tray: :octocat:
 </div>
 <h1 align="center">
-File Uploader 
+File Uploader
 </h1>
 <p align="center">
-A GitHub Action for uploading files to S3/FTP/WebDAV and 
+A GitHub Action for uploading files to S3/FTP/WebDAV and
 <a href="https://docs.rs/opendal/latest/opendal/services/index.html">more</a>
-,powered by 
-<a href="https://github.com/apache/incubator-opendal">Apache OpenDAL</a>
+,powered by <a href="https://github.com/apache/incubator-opendal">Apache OpenDAL</a>
 </p>
 
-<p align="right">
+<p align="center">
+  <!-- markdownlint-disable-next-line MD013 -->
+  <a href="https://github.com/bxb100/action-upload/actions/workflows/check-dist.yml"><img alt="Dist Check" src="https://github.com/bxb100/action-upload/actions/workflows/check-dist.yml/badge.svg"></a>
+  <!-- markdownlint-disable-next-line MD013 -->
+  <a href="https://github.com/bxb100/action-upload/actions/workflows/codeql-analysis.yml"><img alt="CodeQL" src="https://github.com/bxb100/action-upload/actions/workflows/codeql-analysis.yml/badge.svg"></a>
+  <!-- markdownlint-disable-next-line MD013 -->
+  <a href="https://github.com/bxb100/action-upload/actions/workflows/linter.yml"><img alt="Code Lint" src="https://github.com/bxb100/action-upload/actions/workflows/linter.yml/badge.svg"></a>
+  <!-- markdownlint-disable-next-line MD013 -->
+  <a href="https://github.com/bxb100/action-upload/actions/workflows/oxlint.yml"><img alt="Oxlint" src="https://github.com/bxb100/action-upload/actions/workflows/oxlint.yml/badge.svg"></a>
 </p>
 
 ## All Parameters
@@ -30,7 +37,7 @@ A GitHub Action for uploading files to S3/FTP/WebDAV and
 
 ### Memory (for test)
 
-[![build-test](https://github.com/bxb100/action-upload/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/bxb100/action-upload/actions/workflows/test.yml)
+[![Memory Test](https://github.com/bxb100/action-upload/actions/workflows/test-memory.yml/badge.svg)](https://github.com/bxb100/action-upload/actions/workflows/test-memory.yml)
 
 ```yaml
 - name: Upload to memory
@@ -42,7 +49,7 @@ A GitHub Action for uploading files to S3/FTP/WebDAV and
 
 ### WebDAV
 
-[![webdav test in multiplatform](https://github.com/bxb100/action-upload/actions/workflows/test-multiplatform.yml/badge.svg)](https://github.com/bxb100/action-upload/actions/workflows/test-multiplatform.yml)
+[![WebDAV Multi-OS](https://github.com/bxb100/action-upload/actions/workflows/test-webdav-multiplatform.yml/badge.svg)](https://github.com/bxb100/action-upload/actions/workflows/test-webdav-multiplatform.yml)
 
 <details>
 <summary>Options</summary>
@@ -74,7 +81,7 @@ A GitHub Action for uploading files to S3/FTP/WebDAV and
 
 ### S3
 
-[![test-s3](https://github.com/bxb100/action-upload/actions/workflows/test-s3.yml/badge.svg?branch=main)](https://github.com/bxb100/action-upload/actions/workflows/test-s3.yml)
+[![S3 Test](https://github.com/bxb100/action-upload/actions/workflows/test-s3.yml/badge.svg)](https://github.com/bxb100/action-upload/actions/workflows/test-s3.yml)
 
 Aws S3 and compatible services (including minio, digitalocean space and so on)
 support.
