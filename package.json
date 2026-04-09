@@ -12,7 +12,8 @@
     "lint": "oxlint src/**/*.ts",
     "local-action": "NODE_OPTIONS=--no-experimental-strip-types NODE_ENV=test npx @github/local-action . src/main.ts .env",
     "download": "node ./script/vendor_opendal.mjs",
-    "test": "NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 npx jest",
+    "typecheck": "tsc -p tsconfig.test.json --noEmit",
+    "test": "npm run typecheck && NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 npx jest",
     "package": "rimraf dist && npm run build && npm run download",
     "all": "npm test && npm run format:write && npm run lint && npm run package"
   },

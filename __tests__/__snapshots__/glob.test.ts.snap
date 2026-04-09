@@ -39,6 +39,7 @@ exports[`glob github issue 110 - workspace 1`] = `
   "src/main.ts",
   "trivy.yaml",
   "tsconfig.json",
+  "tsconfig.test.json",
   "tsdown.config.ts",
 ]
 `;
