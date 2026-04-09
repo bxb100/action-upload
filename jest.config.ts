@@ -1,19 +1,21 @@
 import type { Config } from 'jest'
 
-import { createDefaultEsmPreset } from 'ts-jest'
-
-const presetConfig = createDefaultEsmPreset({
+const config: Config = {
   clearMocks: true,
+  extensionsToTreatAsEsm: ['.ts'],
   moduleFileExtensions: ['js', 'ts'],
   testMatch: ['**/*.test.ts'],
   transform: {
-    '^.+\\.ts$': 'ts-jest'
+    '^.+\\.(t|j)sx?$': [
+      '@swc/jest',
+      {
+        jsc: {
+          target: 'es2022'
+        }
+      }
+    ]
   },
   verbose: true
-})
-
-const config: Config = {
-  ...presetConfig
 }
 
 export default config
