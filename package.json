@@ -37,7 +37,7 @@
     "@jest/globals": "^30.3.0",
     "@swc/core": "^1.15.24",
     "@swc/jest": "^0.2.39",
-    "@types/node": "^25.5.0",
+    "@types/node": "^25.5.2",
     "eslint-plugin-github": "^6.0.0",
     "jest": "^30.3.0",
     "js-yaml": "^4.1.0",
