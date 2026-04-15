@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "@jest/globals": "^30.3.0",
-    "@swc/core": "^1.15.24",
+    "@swc/core": "^1.15.26",
     "@swc/jest": "^0.2.39",
     "@types/node": "^25.5.0",
     "eslint-plugin-github": "^6.0.0",
