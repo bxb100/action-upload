@@ -1,134 +1,247 @@
-<div align="center">
-  :outbox_tray: :octocat:
-</div>
-<h1 align="center">
-File Uploader
-</h1>
-<p align="center">
-A GitHub Action for uploading files to S3/FTP/WebDAV and
-<a href="https://docs.rs/opendal/latest/opendal/services/index.html">more</a>
-,powered by <a href="https://github.com/apache/incubator-opendal">Apache OpenDAL</a>
-</p>
+<h1 align="center">USING AI</h1>
 
-<p align="center">
-  <!-- markdownlint-disable-next-line MD013 -->
-  <a href="https://github.com/bxb100/action-upload/actions/workflows/check-dist.yml"><img alt="Dist Check" src="https://github.com/bxb100/action-upload/actions/workflows/check-dist.yml/badge.svg"></a>
-  <!-- markdownlint-disable-next-line MD013 -->
-  <a href="https://github.com/bxb100/action-upload/actions/workflows/codeql-analysis.yml"><img alt="CodeQL" src="https://github.com/bxb100/action-upload/actions/workflows/codeql-analysis.yml/badge.svg"></a>
-  <!-- markdownlint-disable-next-line MD013 -->
-  <a href="https://github.com/bxb100/action-upload/actions/workflows/linter.yml"><img alt="Code Lint" src="https://github.com/bxb100/action-upload/actions/workflows/linter.yml/badge.svg"></a>
-  <!-- markdownlint-disable-next-line MD013 -->
-  <a href="https://github.com/bxb100/action-upload/actions/workflows/oxlint.yml"><img alt="Oxlint" src="https://github.com/bxb100/action-upload/actions/workflows/oxlint.yml/badge.svg"></a>
-</p>
+[//]: # ()
+[//]: # ()
+[//]: # (<div align="center">)
 
-## All Parameters
+[//]: # (  :outbox_tray: :octocat:)
 
-| Input              | Description                                                                  | Default |
-| :----------------- | :--------------------------------------------------------------------------- | :------ |
-| `provider`         | The uploader name                                                            | -       |
-| `provider_options` | Newline-delimited list of the uploader options<br/> using `key=value` format | -       |
-| `include`          | Newline-delimited list of the glob pattern [^1]                              | -       |
-| `flatten`          | flatten the upload path                                                      | false   |
+[//]: # (</div>)
 
-> 🐾 You can learn more about multi-line 
-> [YAML syntax](https://yaml-multiline.info/)
+[//]: # (<h1 align="center">)
 
-## Providers
+[//]: # (File Uploader)
 
-### Memory (for test)
+[//]: # (</h1>)
 
-[![Memory Test](https://github.com/bxb100/action-upload/actions/workflows/test-memory.yml/badge.svg)](https://github.com/bxb100/action-upload/actions/workflows/test-memory.yml)
+[//]: # (<p align="center">)
 
-```yaml
-- name: Upload to memory
-  uses: bxb100/action-upload@v0
-  with:
-    provider: memory
-    include: '__tests__/**'
-```
+[//]: # (A GitHub Action for uploading files to S3/FTP/WebDAV and)
 
-### WebDAV
+[//]: # (<a href="https://docs.rs/opendal/latest/opendal/services/index.html">more</a>)
 
-[![WebDAV Multi-OS](https://github.com/bxb100/action-upload/actions/workflows/test-webdav-multiplatform.yml/badge.svg)](https://github.com/bxb100/action-upload/actions/workflows/test-webdav-multiplatform.yml)
+[//]: # (,powered by <a href="https://github.com/apache/incubator-opendal">Apache OpenDAL</a>)
 
-<details>
-<summary>Options</summary>
+[//]: # (</p>)
 
-[OpenDAL WebDAV](https://docs.rs/opendal/latest/opendal/services/struct.Webdav.html)
+[//]: # ()
+[//]: # (<p align="center">)
 
-| Name     | Description         | Default | Other                               |
-| -------- | ------------------- | ------- | ----------------------------------- |
-| endpoint | WebDAV endpoint     | -       | -                                   |
-| username | WebDAV username     | -       | -                                   |
-| password | WebDAV password     | -       | -                                   |
-| token    | WebDAV bearer token | -       | -                                   |
-| root     | WebDAV root path    | -       | MUST be the format like `/abc/def/` |
+[//]: # (  <!-- markdownlint-disable-next-line MD013 -->)
 
-</details>
+[//]: # (  <a href="https://github.com/bxb100/action-upload/actions/workflows/check-dist.yml"><img alt="Dist Check" src="https://github.com/bxb100/action-upload/actions/workflows/check-dist.yml/badge.svg"></a>)
 
-```yaml
-- name: Upload to WebDAV
-  uses: bxb100/action-upload@v0
-  with:
-    provider: webdav
-    provider_options: |
-      endpoint=${{ secrets.WEBDAV_ENDPOINT }}
-      username=${{ secrets.WEBDAV_USERNAME }}
-      password=${{ secrets.WEBDAV_PASSWORD }}
-      root=/test/
-    include: '__tests__/**'
-```
+[//]: # (  <!-- markdownlint-disable-next-line MD013 -->)
 
-### S3
+[//]: # (  <a href="https://github.com/bxb100/action-upload/actions/workflows/codeql-analysis.yml"><img alt="CodeQL" src="https://github.com/bxb100/action-upload/actions/workflows/codeql-analysis.yml/badge.svg"></a>)
 
-[![S3 Test](https://github.com/bxb100/action-upload/actions/workflows/test-s3.yml/badge.svg)](https://github.com/bxb100/action-upload/actions/workflows/test-s3.yml)
+[//]: # (  <!-- markdownlint-disable-next-line MD013 -->)
 
-Aws S3 and compatible services (including minio, digitalocean space and so on)
-support.
+[//]: # (  <a href="https://github.com/bxb100/action-upload/actions/workflows/linter.yml"><img alt="Code Lint" src="https://github.com/bxb100/action-upload/actions/workflows/linter.yml/badge.svg"></a>)
 
-<details>
-<summary>Options</summary>
+[//]: # (  <!-- markdownlint-disable-next-line MD013 -->)
 
-[OpenDAL S3](https://docs.rs/opendal/latest/opendal/services/struct.S3.html)
+[//]: # (  <a href="https://github.com/bxb100/action-upload/actions/workflows/oxlint.yml"><img alt="Oxlint" src="https://github.com/bxb100/action-upload/actions/workflows/oxlint.yml/badge.svg"></a>)
 
-- `root`: Set the work dir for backend.
-- `bucket`: Set the container name for backend.
-- `endpoint`: Set the endpoint for backend.
-- `region`: Set the region for backend.
-- `access_key_id`: Set the access_key_id for backend.
-- `secret_access_key`: Set the secret_access_key for backend.
-- `security_token`: Set the security_token for backend.
-- `server_side_encryption`: Set the server_side_encryption for backend.
-- `server_side_encryption_aws_kms_key_id`: Set the
-  server_side_encryption_aws_kms_key_id for backend.
-- `server_side_encryption_customer_algorithm`: Set the
-  server_side_encryption_customer_algorithm for backend.
-- `server_side_encryption_customer_key`: Set the
-  server_side_encryption_customer_key for backend.
-- `server_side_encryption_customer_key_md5`: Set the
-  server_side_encryption_customer_key_md5 for backend.
-- `disable_config_load`: Disable aws config load from env
-- `enable_virtual_host_style`: Enable virtual host style.
+[//]: # (</p>)
 
-</details>
+[//]: # ()
+[//]: # (## All Parameters)
 
-```yaml
-- name: Upload to R2
-  uses: bxb100/action-upload@v0
-  with:
-    provider: s3
-    provider_options: |
-      root=/cs
-      bucket=action-upload-test
-      region=auto
-      endpoint=https://${{secrets.CLOUDFLARE_R2_ACCOUNTID}}.r2.cloudflarestorage.com
-      access_key_id=${{secrets.CLOUDFLARE_R2_KEY}}
-      secret_access_key=${{secrets.CLOUDFLARE_R2_SECRET}}
-    include: '__tests__/**'
-```
+[//]: # ()
+[//]: # (| Input              | Description                                                                  | Default |)
 
-### Other
+[//]: # (| :----------------- | :--------------------------------------------------------------------------- | :------ |)
 
-<https://docs.rs/opendal/latest/opendal/services/index.html>
+[//]: # (| `provider`         | The uploader name                                                            | -       |)
 
-[^1]: <https://github.com/actions/toolkit/tree/main/packages/glob>
+[//]: # (| `provider_options` | Newline-delimited list of the uploader options<br/> using `key=value` format | -       |)
+
+[//]: # (| `include`          | Newline-delimited list of the glob pattern [^1]                              | -       |)
+
+[//]: # (| `flatten`          | flatten the upload path                                                      | false   |)
+
+[//]: # ()
+[//]: # (> 🐾 You can learn more about multi-line)
+
+[//]: # (> [YAML syntax]&#40;https://yaml-multiline.info/&#41;)
+
+[//]: # ()
+[//]: # (## Providers)
+
+[//]: # ()
+[//]: # (### Memory &#40;for test&#41;)
+
+[//]: # ()
+[//]: # ([![Memory Test]&#40;https://github.com/bxb100/action-upload/actions/workflows/test-memory.yml/badge.svg&#41;]&#40;https://github.com/bxb100/action-upload/actions/workflows/test-memory.yml&#41;)
+
+[//]: # ()
+[//]: # (```yaml)
+
+[//]: # (- name: Upload to memory)
+
+[//]: # (  uses: bxb100/action-upload@v0)
+
+[//]: # (  with:)
+
+[//]: # (    provider: memory)
+
+[//]: # (    include: '__tests__/**')
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (### WebDAV)
+
+[//]: # ()
+[//]: # ([![WebDAV Multi-OS]&#40;https://github.com/bxb100/action-upload/actions/workflows/test-webdav-multiplatform.yml/badge.svg&#41;]&#40;https://github.com/bxb100/action-upload/actions/workflows/test-webdav-multiplatform.yml&#41;)
+
+[//]: # ()
+[//]: # (<details>)
+
+[//]: # (<summary>Options</summary>)
+
+[//]: # ()
+[//]: # ([OpenDAL WebDAV]&#40;https://docs.rs/opendal/latest/opendal/services/struct.Webdav.html&#41;)
+
+[//]: # ()
+[//]: # (| Name     | Description         | Default | Other                               |)
+
+[//]: # (| -------- | ------------------- | ------- | ----------------------------------- |)
+
+[//]: # (| endpoint | WebDAV endpoint     | -       | -                                   |)
+
+[//]: # (| username | WebDAV username     | -       | -                                   |)
+
+[//]: # (| password | WebDAV password     | -       | -                                   |)
+
+[//]: # (| token    | WebDAV bearer token | -       | -                                   |)
+
+[//]: # (| root     | WebDAV root path    | -       | MUST be the format like `/abc/def/` |)
+
+[//]: # ()
+[//]: # (</details>)
+
+[//]: # ()
+[//]: # (```yaml)
+
+[//]: # (- name: Upload to WebDAV)
+
+[//]: # (  uses: bxb100/action-upload@v0)
+
+[//]: # (  with:)
+
+[//]: # (    provider: webdav)
+
+[//]: # (    provider_options: |)
+
+[//]: # (      endpoint=${{ secrets.WEBDAV_ENDPOINT }})
+
+[//]: # (      username=${{ secrets.WEBDAV_USERNAME }})
+
+[//]: # (      password=${{ secrets.WEBDAV_PASSWORD }})
+
+[//]: # (      root=/test/)
+
+[//]: # (    include: '__tests__/**')
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (### S3)
+
+[//]: # ()
+[//]: # ([![S3 Test]&#40;https://github.com/bxb100/action-upload/actions/workflows/test-s3.yml/badge.svg&#41;]&#40;https://github.com/bxb100/action-upload/actions/workflows/test-s3.yml&#41;)
+
+[//]: # ()
+[//]: # (Aws S3 and compatible services &#40;including minio, digitalocean space and so on&#41;)
+
+[//]: # (support.)
+
+[//]: # ()
+[//]: # (<details>)
+
+[//]: # (<summary>Options</summary>)
+
+[//]: # ()
+[//]: # ([OpenDAL S3]&#40;https://docs.rs/opendal/latest/opendal/services/struct.S3.html&#41;)
+
+[//]: # ()
+[//]: # (- `root`: Set the work dir for backend.)
+
+[//]: # (- `bucket`: Set the container name for backend.)
+
+[//]: # (- `endpoint`: Set the endpoint for backend.)
+
+[//]: # (- `region`: Set the region for backend.)
+
+[//]: # (- `access_key_id`: Set the access_key_id for backend.)
+
+[//]: # (- `secret_access_key`: Set the secret_access_key for backend.)
+
+[//]: # (- `security_token`: Set the security_token for backend.)
+
+[//]: # (- `server_side_encryption`: Set the server_side_encryption for backend.)
+
+[//]: # (- `server_side_encryption_aws_kms_key_id`: Set the)
+
+[//]: # (  server_side_encryption_aws_kms_key_id for backend.)
+
+[//]: # (- `server_side_encryption_customer_algorithm`: Set the)
+
+[//]: # (  server_side_encryption_customer_algorithm for backend.)
+
+[//]: # (- `server_side_encryption_customer_key`: Set the)
+
+[//]: # (  server_side_encryption_customer_key for backend.)
+
+[//]: # (- `server_side_encryption_customer_key_md5`: Set the)
+
+[//]: # (  server_side_encryption_customer_key_md5 for backend.)
+
+[//]: # (- `disable_config_load`: Disable aws config load from env)
+
+[//]: # (- `enable_virtual_host_style`: Enable virtual host style.)
+
+[//]: # ()
+[//]: # (</details>)
+
+[//]: # ()
+[//]: # (```yaml)
+
+[//]: # (- name: Upload to R2)
+
+[//]: # (  uses: bxb100/action-upload@v0)
+
+[//]: # (  with:)
+
+[//]: # (    provider: s3)
+
+[//]: # (    provider_options: |)
+
+[//]: # (      root=/cs)
+
+[//]: # (      bucket=action-upload-test)
+
+[//]: # (      region=auto)
+
+[//]: # (      endpoint=https://${{secrets.CLOUDFLARE_R2_ACCOUNTID}}.r2.cloudflarestorage.com)
+
+[//]: # (      access_key_id=${{secrets.CLOUDFLARE_R2_KEY}})
+
+[//]: # (      secret_access_key=${{secrets.CLOUDFLARE_R2_SECRET}})
+
+[//]: # (    include: '__tests__/**')
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (### Other)
+
+[//]: # ()
+[//]: # (<https://docs.rs/opendal/latest/opendal/services/index.html>)
+
+[//]: # ()
+[//]: # ([^1]: <https://github.com/actions/toolkit/tree/main/packages/glob>)
+
+[//]: # ()
